@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">BudgetApp</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Welcome!</string>
+    <string name="profileFragment_name">Welcome!</string>
+    <string name="profileFragment_budgetTitle">YOUR MONTHLY BUDGET:</string>
 </resources>
