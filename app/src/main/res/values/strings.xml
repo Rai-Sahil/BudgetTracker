@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">BudgetApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+<<<<<<< HEAD
     <string name="hello_blank_fragment">Welcome!</string>
     <string name="profileFragment_name">Welcome!</string>
     <string name="profileFragment_budgetTitle">YOUR MONTHLY BUDGET:</string>
+=======
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_bill">Bills</string>
+    <string name="menu_budget">Budgets</string>
+    <string name="menu_expense">Expenses</string>
+    <string name="menu_profile">Profile</string>
+>>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>
