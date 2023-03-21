@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bcit.budgetapp.R
+import com.bcit.budgetapp.bill_recycler
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,8 +40,19 @@ class BillFragment : Fragment()
         savedInstanceState: Bundle?
     ): View?
     {
+        var view = inflater.inflate(R.layout.fragment_bill, container, false)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView_billFragment)
+        //insert data here
+        //dummy data
+        val data = arrayListOf("hi", "hello", "whatsup")
+        if (recyclerView != null)
+        {
+            recyclerView.adapter = bill_recycler(data)
+            recyclerView.layoutManager = LinearLayoutManager(activity)
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bill, container, false)
+        return view
+
     }
 
     companion object

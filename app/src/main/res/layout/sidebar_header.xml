@@ -2,38 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="132dp"
-            android:layout_height="119dp"
-            app:cardBackgroundColor="#3F51B5"
-            app:cardCornerRadius="20dp">
-
-            <TextView
-                android:id="@+id/textView_sidebar_initials"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="TL"
-                android:textSize="48sp" />
-        </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="132dp"
+        android:layout_height="119dp"
+        app:cardBackgroundColor="#3F51B5"
+        app:cardCornerRadius="20dp">
 
         <TextView
-            android:id="@+id/textView_sidebar_name"
+            android:id="@+id/textView_sidebar_initials"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TL"
+            android:textSize="48sp" />
+    </androidx.cardview.widget.CardView>
 
-    </TableRow>
+    <TextView
+        android:id="@+id/textView_sidebar_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="TextView" />
 
 </LinearLayout>
