@@ -2,35 +2,21 @@ package com.bcit.budgetapp.dataClasses
 
 class Budget
 {
-    private val budgets = ArrayList<BudgetCategory>()
+    public var budgetAmount: Double = 0.0
+    public val transactions = ArrayList<Transaction>()
 
-    public fun addBudgetCat(budgetCat: BudgetCategory)
+    public fun addTransaction(transaction: Transaction)
     {
-        budgets.add(budgetCat)
+        transactions.add(transaction)
     }
 
-    public fun getBudgets(): ArrayList<BudgetCategory>
+    public fun getTotalSpent(): Double
     {
-        return budgets
-    }
+        var total = 0.0
 
-    public fun getTotalSpent(): Float
-    {
-        var total = 0F
-        for(budget: BudgetCategory in budgets )
+        for(transaction: Transaction in transactions)
         {
-            total += budget.spentCad
-        }
-
-        return total
-    }
-
-    public fun getTotalLimit(): Float
-    {
-        var total = 0F
-        for(budget: BudgetCategory in budgets )
-        {
-            total += budget.limitCad
+            total += transaction.amount
         }
 
         return total

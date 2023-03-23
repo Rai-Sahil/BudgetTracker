@@ -13,5 +13,11 @@
     <string name="billFragment_type">Type:</string>
     <string name="billFragment_amount">Amount:</string>
     <string name="billFragment_due">Date Due:</string>
+    <string name="expenses_add">Add Expenses</string>
+    <string name="radioTransacton_expenses">Transaction</string>
+    <string name="radioBill">Bill</string>
+    <string name="expense_category">Category</string>
+    <string name="expense_cad">Amount $</string>
+    <string name="expense_add">Add Expense</string>
     >>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>
