@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.activityViewModels
+import com.bcit.budgetapp.BudgetViewModel
 import com.bcit.budgetapp.MainActivity
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.dataClasses.Transaction
@@ -14,6 +16,8 @@ import java.sql.Date
 
 class ExpenseFragment : Fragment()
 {
+    private val budgetViewModel: BudgetViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -33,27 +37,27 @@ class ExpenseFragment : Fragment()
         super.onViewCreated(view, savedInstanceState)
 
         doTransactionStuff(view)
+
         var button = view.findViewById<Button>(R.id.button_expense_add).setOnClickListener{
+
             val datePicker = view.findViewById<DatePicker>(R.id.datePicker_expense)
             val editTextNumber = view.findViewById<EditText>(R.id.editTextNumberDecimal_expense)
             val spinner = view.findViewById<Spinner>(R.id.expense_spinner)
             val date = Date(datePicker.year, datePicker.month, datePicker.dayOfMonth)
-
+            val checkbox = view.findViewById<CheckBox>(R.id.checkBox_expense)
             var amount = 0.0
 
-            if(!editTextNumber.text.toString().isEmpty())
+            if(editTextNumber.text.toString().isNotEmpty())
             {
-                val amount = editTextNumber.text.toString().toDouble()
+                amount = editTextNumber.text.toString().toDouble()
             }
 
-            val transaction = Transaction(amount, date, (spinner.selectedItem as TransactionCategory) )
+            val transaction = Transaction(amount, date, (spinner.selectedItem as TransactionCategory), checkbox.isChecked )
 
             //this needs to be not this
-            (activity as MainActivity).budget.addTransaction(transaction)
+            budgetViewModel.budget.addTransaction(transaction)
         }
     }
-
-
 
     private fun doTransactionStuff(view: View)
     {
@@ -63,13 +67,4 @@ class ExpenseFragment : Fragment()
         spinner.adapter = adapter
     }
 
-    companion object
-    {
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ExpenseFragment().apply {
-
-            }
-    }
 }
