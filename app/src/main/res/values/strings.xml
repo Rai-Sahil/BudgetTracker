@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Welcome!</string>
     <string name="profileFragment_name">Welcome!</string>
-    <string name="profileFragment_budgetTitle">YOUR MONTHLY BUDGET:</string>
+    <string name="profileFragment_budgetTitle">MONTHLY BUDGET:</string>
 =======
     <string name="menu_bill">Bills</string>
     <string name="menu_budget">Budgets</string>
