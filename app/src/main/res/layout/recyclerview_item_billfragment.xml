@@ -84,7 +84,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/budget_due"
+                    android:id="@+id/budget_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -98,7 +98,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/budget_amount"
+                    android:id="@+id/budget_due"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
