@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.bcit.budgetapp.Views.loginFrags.LoginFragment"
+        android:name="com.bcit.budgetapp.Views.AuthenticationFragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.bcit.budgetapp.Views.loginFrags.SignUpFragment"
+        android:name="com.bcit.budgetapp.Views.AuthenticationFragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
 </navigation>

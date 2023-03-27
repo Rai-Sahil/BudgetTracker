@@ -1,4 +1,4 @@
-package com.bcit.budgetapp.Views.mainFrags
+package com.bcit.budgetapp.Views.MainFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
