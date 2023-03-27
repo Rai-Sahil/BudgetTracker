@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
 import com.bcit.budgetapp.BudgetViewModel
-import com.bcit.budgetapp.MainActivity
 import com.bcit.budgetapp.R
+import com.bcit.budgetapp.dataClasses.Bill
+import com.bcit.budgetapp.dataClasses.BillType
 import com.bcit.budgetapp.dataClasses.Transaction
 import com.bcit.budgetapp.dataClasses.TransactionCategory
 import java.sql.Date
@@ -38,11 +39,18 @@ class ExpenseFragment : Fragment()
 
         doTransactionStuff(view)
 
+        view.findViewById<Spinner>(R.id.expense_spinner_freq).isEnabled = false
+
+        view.findViewById<RadioButton>(R.id.checkBox_expense).setOnCheckedChangeListener { buttonView, isChecked ->
+            view.findViewById<Spinner>(R.id.expense_spinner_freq).isEnabled = isChecked
+        }
+
         var button = view.findViewById<Button>(R.id.button_expense_add).setOnClickListener{
 
             val datePicker = view.findViewById<DatePicker>(R.id.datePicker_expense)
             val editTextNumber = view.findViewById<EditText>(R.id.editTextNumberDecimal_expense)
             val spinner = view.findViewById<Spinner>(R.id.expense_spinner)
+            val spinnerFreq = view.findViewById<Spinner>(R.id.expense_spinner_freq)
             val date = Date(datePicker.year, datePicker.month, datePicker.dayOfMonth)
             val checkbox = view.findViewById<CheckBox>(R.id.checkBox_expense)
             var amount = 0.0
@@ -52,11 +60,16 @@ class ExpenseFragment : Fragment()
                 amount = editTextNumber.text.toString().toDouble()
             }
 
-
-            val transaction = Transaction(amount, date, (spinner.selectedItem as TransactionCategory))
-
-            //this needs to be not this
-            budgetViewModel.budget.addTransaction(transaction)
+            if(checkbox.isChecked)
+            {
+                val bill = Bill(amount, date, (spinner.selectedItem as TransactionCategory), (spinnerFreq.selectedItem as BillType))
+                budgetViewModel.budget.addBill(bill)
+            }
+            else
+            {
+                val transaction = Transaction(amount, date, (spinner.selectedItem as TransactionCategory))
+                budgetViewModel.budget.addTransaction(transaction)
+            }
         }
     }
 
@@ -66,6 +79,11 @@ class ExpenseFragment : Fragment()
         val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values())
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
+
+        val spinnerFreq = view.findViewById<Spinner>(R.id.expense_spinner_freq)
+        val adapterFreq = ArrayAdapter<BillType>(view.context, android.R.layout.simple_spinner_item, BillType.values())
+        adapterFreq.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerFreq.adapter = adapterFreq
     }
 
 }

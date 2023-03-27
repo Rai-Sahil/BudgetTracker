@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".mainFrags.ExpenseFragment"
-    android:background="@drawable/background">
+    tools:context=".mainFrags.ExpenseFragment">
 
     <TextView
         android:id="@+id/textView3"
@@ -59,11 +59,21 @@
         android:ems="10"
         android:inputType="numberDecimal" />
 
-    <CheckBox
-        android:id="@+id/checkBox_expense"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/expense_recurring" />
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkBox_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/expense_recurring" />
+
+        <Spinner
+            android:id="@+id/expense_spinner_freq"
+            android:layout_width="match_parent"
+            android:layout_height="53dp" />
+    </TableRow>
 
     <Button
         android:id="@+id/button_expense_add"
@@ -71,6 +81,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@color/yellow_dark"
-        android:textColor="@color/black"
-        android:text="@string/expense_add" />
+        android:text="@string/expense_add"
+        android:textColor="@color/black" />
 </LinearLayout>

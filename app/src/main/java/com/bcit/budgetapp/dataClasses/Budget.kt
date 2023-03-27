@@ -11,6 +11,11 @@ class Budget
         transactions.add(transaction)
     }
 
+    public fun addBill(bill: Bill)
+    {
+        bills.add(bill)
+    }
+
     public fun getTotalSpent(): Double
     {
         var total = 0.0
