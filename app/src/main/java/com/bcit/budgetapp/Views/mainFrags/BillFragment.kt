@@ -1,4 +1,4 @@
-package com.bcit.budgetapp.mainFrags
+package com.bcit.budgetapp.Views.mainFrags
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bcit.budgetapp.BudgetViewModel
+import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.R
-import com.bcit.budgetapp.bill_recycler
+import com.bcit.budgetapp.Views.bill_recycler
 
 
 /**
@@ -40,7 +40,7 @@ class BillFragment : Fragment()
 
         if (recyclerView != null)
         {
-            recyclerView.adapter = bill_recycler(budgetViewModel.budget.transactions.filter { it.recurring })
+            recyclerView.adapter = bill_recycler(budgetViewModel.budget.bills)
             recyclerView.layoutManager = LinearLayoutManager(activity)
         }
         // Inflate the layout for this fragment

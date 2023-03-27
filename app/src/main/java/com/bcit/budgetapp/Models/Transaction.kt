@@ -1,4 +1,4 @@
-package com.bcit.budgetapp.dataClasses
+package com.bcit.budgetapp.Models
 
 import java.util.*
 

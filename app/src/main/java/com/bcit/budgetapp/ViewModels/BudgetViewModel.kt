@@ -1,7 +1,7 @@
-package com.bcit.budgetapp
+package com.bcit.budgetapp.ViewModels
 
 import androidx.lifecycle.ViewModel
-import com.bcit.budgetapp.dataClasses.Budget
+import com.bcit.budgetapp.Models.*
 
 class BudgetViewModel : ViewModel()
 {

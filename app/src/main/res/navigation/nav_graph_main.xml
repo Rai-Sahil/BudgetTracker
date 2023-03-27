@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/expenseFragment"
-        android:name="com.bcit.budgetapp.mainFrags.ExpenseFragment"
+        android:name="com.bcit.budgetapp.Views.mainFrags.ExpenseFragment"
         android:label="fragment_expense"
         tools:layout="@layout/fragment_expense" />
     <fragment
         android:id="@+id/billFragment"
-        android:name="com.bcit.budgetapp.mainFrags.BillFragment"
+        android:name="com.bcit.budgetapp.Views.mainFrags.BillFragment"
         android:label="fragment_bill"
         tools:layout="@layout/fragment_bill" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.bcit.budgetapp.mainFrags.ProfileFragment"
+        android:name="com.bcit.budgetapp.Views.mainFrags.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/budgetFragment"
-        android:name="com.bcit.budgetapp.mainFrags.BudgetFragment"
+        android:name="com.bcit.budgetapp.Views.mainFrags.BudgetFragment"
         android:label="fragment_budget"
         tools:layout="@layout/fragment_budget" />
 </navigation>
