@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
-import com.bcit.budgetapp.BudgetViewModel
+import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.R
-import com.bcit.budgetapp.dataClasses.Bill
-import com.bcit.budgetapp.dataClasses.BillType
-import com.bcit.budgetapp.dataClasses.Transaction
-import com.bcit.budgetapp.dataClasses.TransactionCategory
+import com.bcit.budgetapp.Models.Bill
+import com.bcit.budgetapp.Models.BillType
+import com.bcit.budgetapp.Models.Transaction
+import com.bcit.budgetapp.Models.TransactionCategory
 import java.sql.Date
 
 class ExpenseFragment : Fragment()
@@ -41,7 +41,7 @@ class ExpenseFragment : Fragment()
 
         view.findViewById<Spinner>(R.id.expense_spinner_freq).isEnabled = false
 
-        view.findViewById<RadioButton>(R.id.checkBox_expense).setOnCheckedChangeListener { buttonView, isChecked ->
+        view.findViewById<CheckBox>(R.id.checkBox_expense).setOnCheckedChangeListener { buttonView, isChecked ->
             view.findViewById<Spinner>(R.id.expense_spinner_freq).isEnabled = isChecked
         }
 

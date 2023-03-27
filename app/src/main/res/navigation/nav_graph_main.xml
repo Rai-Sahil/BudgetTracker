@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/expenseFragment">
+    app:startDestination="@id/expenseFragment2">
 
-    <fragment
-        android:id="@+id/expenseFragment"
-        android:name="com.bcit.budgetapp.Views.mainFrags.ExpenseFragment"
-        android:label="fragment_expense"
-        tools:layout="@layout/fragment_expense" />
     <fragment
         android:id="@+id/billFragment"
         android:name="com.bcit.budgetapp.Views.mainFrags.BillFragment"
@@ -25,4 +20,9 @@
         android:name="com.bcit.budgetapp.Views.mainFrags.BudgetFragment"
         android:label="fragment_budget"
         tools:layout="@layout/fragment_budget" />
+    <fragment
+        android:id="@+id/expenseFragment2"
+        android:name="com.bcit.budgetapp.mainFrags.ExpenseFragment"
+        android:label="fragment_expense"
+        tools:layout="@layout/fragment_expense" />
 </navigation>
