@@ -1,4 +1,4 @@
-package com.bcit.budgetapp.mainFrags
+package com.bcit.budgetapp.Views.mainFrags
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
-import com.bcit.budgetapp.BudgetViewModel
-import com.bcit.budgetapp.MainActivity
+import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.R
-import com.bcit.budgetapp.dataClasses.Transaction
-import com.bcit.budgetapp.dataClasses.TransactionCategory
+import com.bcit.budgetapp.Models.Transaction
+import com.bcit.budgetapp.Models.TransactionCategory
 import java.sql.Date
 
 class ExpenseFragment : Fragment()

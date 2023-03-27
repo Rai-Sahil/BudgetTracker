@@ -1,15 +1,15 @@
-package com.bcit.budgetapp
+package com.bcit.budgetapp.Views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.bcit.budgetapp.dataClasses.Budget
+import com.bcit.budgetapp.R
+import com.bcit.budgetapp.Models.Budget
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener

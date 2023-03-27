@@ -1,7 +1,8 @@
-package com.bcit.budgetapp
+package com.bcit.budgetapp.Views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bcit.budgetapp.R
 
 class AuthenticationActivity : AppCompatActivity()
 {

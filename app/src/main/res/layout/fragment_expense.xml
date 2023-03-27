@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mainFrags.ExpenseFragment"
+    tools:context=".Views.mainFrags.ExpenseFragment"
     android:background="@drawable/background">
 
     <TextView

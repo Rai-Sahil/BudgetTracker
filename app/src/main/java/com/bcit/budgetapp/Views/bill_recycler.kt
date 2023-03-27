@@ -1,11 +1,12 @@
-package com.bcit.budgetapp
+package com.bcit.budgetapp.Views
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bcit.budgetapp.dataClasses.Transaction
+import com.bcit.budgetapp.R
+import com.bcit.budgetapp.Models.Transaction
 
 
 class bill_recycler(private val mList: List<Transaction>) :
