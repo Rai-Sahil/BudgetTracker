@@ -52,7 +52,8 @@ class ExpenseFragment : Fragment()
                 amount = editTextNumber.text.toString().toDouble()
             }
 
-            val transaction = Transaction(amount, date, (spinner.selectedItem as TransactionCategory), checkbox.isChecked )
+
+            val transaction = Transaction(amount, date, (spinner.selectedItem as TransactionCategory))
 
             //this needs to be not this
             budgetViewModel.budget.addTransaction(transaction)

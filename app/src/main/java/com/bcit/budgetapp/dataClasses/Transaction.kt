@@ -15,6 +15,6 @@ enum class TransactionCategory
     GAS
 }
 
-class Transaction(val amount: Double, val date: Date, val category: TransactionCategory, val recurring: Boolean)
+open class Transaction(val amount: Double, val date: Date, val category: TransactionCategory)
 {
 }
