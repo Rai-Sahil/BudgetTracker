@@ -18,6 +18,8 @@ import java.sql.Date
 class ExpenseFragment : Fragment()
 {
     private val budgetViewModel: BudgetViewModel by activityViewModels()
+    lateinit var spinnerCategories: Spinner
+    lateinit var spinnerFrequencies: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -36,54 +38,69 @@ class ExpenseFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
+        spinnerCategories = view.findViewById<Spinner>(R.id.expense_spinner)
+        spinnerFrequencies = view.findViewById<Spinner>(R.id.expense_spinner_freq)
+        setupSpinners(view)
 
-        doTransactionStuff(view)
-
-        view.findViewById<Spinner>(R.id.expense_spinner_freq).isEnabled = false
+        spinnerFrequencies.isEnabled = false
 
         view.findViewById<CheckBox>(R.id.checkBox_expense).setOnCheckedChangeListener { buttonView, isChecked ->
-            view.findViewById<Spinner>(R.id.expense_spinner_freq).isEnabled = isChecked
-        }
+            spinnerFrequencies.isEnabled = isChecked
 
-        var button = view.findViewById<Button>(R.id.button_expense_add).setOnClickListener{
-
-            val datePicker = view.findViewById<DatePicker>(R.id.datePicker_expense)
-            val editTextNumber = view.findViewById<EditText>(R.id.editTextNumberDecimal_expense)
-            val spinner = view.findViewById<Spinner>(R.id.expense_spinner)
-            val spinnerFreq = view.findViewById<Spinner>(R.id.expense_spinner_freq)
-            val date = Date(datePicker.year, datePicker.month, datePicker.dayOfMonth)
-            val checkbox = view.findViewById<CheckBox>(R.id.checkBox_expense)
-            var amount = 0.0
-
-            if(editTextNumber.text.toString().isNotEmpty())
+            if(isChecked)
             {
-                amount = editTextNumber.text.toString().toDouble()
-            }
-
-            if(checkbox.isChecked)
-            {
-                val bill = Bill(amount, date, (spinner.selectedItem as TransactionCategory), (spinnerFreq.selectedItem as BillType))
-                budgetViewModel.budget.addBill(bill)
+                val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it > TransactionCategory.CLOTHING })
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerCategories.adapter = adapter
             }
             else
             {
-                val transaction = Transaction(amount, date, (spinner.selectedItem as TransactionCategory))
-                budgetViewModel.budget.addTransaction(transaction)
+                val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it < TransactionCategory.ELECTRICITY })
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerCategories.adapter = adapter
             }
+        }
+
+        var button = view.findViewById<Button>(R.id.button_expense_add).setOnClickListener{
+            addExpenseButtonClick(it)
         }
     }
 
-    private fun doTransactionStuff(view: View)
+    private fun addExpenseButtonClick(view: View)
     {
-        val spinner = view.findViewById<Spinner>(R.id.expense_spinner)
-        val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values())
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+        val datePicker = view.rootView.findViewById<DatePicker>(R.id.datePicker_expense)
+        val editTextNumber = view.rootView.findViewById<EditText>(R.id.editTextNumberDecimal_expense)
+        val date = Date(datePicker.year, datePicker.month, datePicker.dayOfMonth)
+        val checkbox = view.rootView.findViewById<CheckBox>(R.id.checkBox_expense)
+        var amount = 0.0
 
-        val spinnerFreq = view.findViewById<Spinner>(R.id.expense_spinner_freq)
+        if(editTextNumber.text.toString().isNotEmpty())
+        {
+            amount = editTextNumber.text.toString().toDouble()
+        }
+
+        if(checkbox.isChecked)
+        {
+            val bill = Bill(amount, date, (spinnerCategories.selectedItem as TransactionCategory), (spinnerFrequencies.selectedItem as BillType))
+            budgetViewModel.budget.addBill(bill)
+        }
+        else
+        {
+            val transaction = Transaction(amount, date, (spinnerCategories.selectedItem as TransactionCategory))
+            budgetViewModel.budget.addTransaction(transaction)
+        }
+    }
+
+    private fun setupSpinners(view: View)
+    {
+        val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it < TransactionCategory.ELECTRICITY })
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCategories.adapter = adapter
+
         val adapterFreq = ArrayAdapter<BillType>(view.context, android.R.layout.simple_spinner_item, BillType.values())
         adapterFreq.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerFreq.adapter = adapterFreq
+        spinnerFrequencies.adapter = adapterFreq
     }
+
 
 }

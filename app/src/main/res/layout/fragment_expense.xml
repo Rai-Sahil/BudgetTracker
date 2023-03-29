@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".Views.MainFragments.ExpenseFragment">
 
     <TextView
@@ -17,63 +18,124 @@
         android:text="@string/expenses_add"
         android:textSize="48sp" />
 
-    <TextView
-        android:id="@+id/textView_date"
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/expenseFragment_date" />
+        android:layout_margin="10dp"
+        app:cardCornerRadius="30dp">
 
-
-    <DatePicker
-        android:id="@+id/datePicker_expense"
-        android:layout_width="match_parent"
-        android:layout_height="92dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
-
-    <TextView
-        android:id="@+id/textView_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/expense_category" />
-
-    <Spinner
-        android:id="@+id/expense_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="53dp" />
-
-    <TextView
-        android:id="@+id/textView_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/expense_cad" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal_expense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal" />
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <CheckBox
-            android:id="@+id/checkBox_expense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/expense_recurring" />
-
-        <Spinner
-            android:id="@+id/expense_spinner_freq"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </TableRow>
+            android:layout_height="wrap_content"
+            android:clipToOutline="false"
+            android:orientation="vertical"
+            android:outlineProvider="none">
+
+            <TextView
+                android:id="@+id/textView_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#00FFEB3B"
+                android:gravity="center"
+                android:text="@string/expenseFragment_date" />
+
+            <DatePicker
+                android:id="@+id/datePicker_expense"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:background="#00FFEB3B"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/expense_category" />
+
+            <Spinner
+                android:id="@+id/expense_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/expense_cad" />
+
+            <EditText
+                android:id="@+id/editTextNumberDecimal_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="20dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/checkBox_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/expense_recurring" />
+
+            <Spinner
+                android:id="@+id/expense_spinner_freq"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </TableRow>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button_expense_add"

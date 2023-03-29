@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/billFragment"
-        android:title="@string/menu_bill" />
+        android:title="@string/menu_bill_trans" />
     <item
         android:id="@+id/expenseFragment"
         android:title="@string/menu_expense" />
