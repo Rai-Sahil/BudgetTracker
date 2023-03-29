@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_margin="0dp"
             android:layout_weight="1"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="#00FFFFFF"
             android:includeFontPadding="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"

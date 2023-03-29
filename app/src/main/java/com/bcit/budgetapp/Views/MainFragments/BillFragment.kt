@@ -37,10 +37,9 @@ class BillFragment : Fragment()
     {
         println("hi")
         view.isEnabled = false
-        view.setBackgroundColor(Color.GRAY)
+        view.background.alpha = 0
         transactionButton.isEnabled = true
-        transactionButton.setBackgroundColor(Color.WHITE)
-
+        transactionButton.background.alpha = 255
         recyclerView.adapter = bill_recycler(budgetViewModel.budget.bills)
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }
@@ -49,9 +48,9 @@ class BillFragment : Fragment()
     {
         println("hello")
         view.isEnabled = false
-        view.setBackgroundColor(Color.GRAY)
+        view.background.alpha = 0
         billButton.isEnabled = true
-        billButton.setBackgroundColor(Color.WHITE)
+        billButton.background.alpha = 255
 
         recyclerView.adapter = transaction_recycler(budgetViewModel.budget.transactions)
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -72,7 +71,7 @@ class BillFragment : Fragment()
         transactionButton.setOnClickListener { transactionButtonClick(it) }
 
         billButton.isEnabled = false
-        billButton.setBackgroundColor(Color.GRAY)
+        billButton.background.alpha = 0
 
         recyclerView.adapter = bill_recycler(budgetViewModel.budget.bills)
         recyclerView.layoutManager = LinearLayoutManager(activity)
