@@ -21,5 +21,6 @@
     <string name="expense_add">Add Expense</string>
     <string name="expense_recurring">Recurring</string>
     <string name="expenseFragment_date">Date</string>
+    <string name="billFragment_transactions">Transactions</string>
     >>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>

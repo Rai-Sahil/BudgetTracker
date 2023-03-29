@@ -1,22 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Views.MainFragments.BillFragment" >
+    tools:context=".Views.MainFragments.BillFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/billFragement_bills"
-        android:textAlignment="center"
-        android:textSize="60sp" />
+    <TableRow
+        android:layout_width="411dp"
+        android:layout_height="91dp">
+
+        <Button
+            android:id="@+id/button_billFrag_bills"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:includeFontPadding="false"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:paddingHorizontal="0dp"
+            android:paddingVertical="0dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="0dp"
+            android:text="@string/billFragement_bills"
+            android:textColor="#000000"
+            app:cornerRadius="0dp"
+            app:iconPadding="0dp"
+            app:strokeColor="#000000"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/button_bilFrag_transactions"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:includeFontPadding="false"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:paddingHorizontal="0dp"
+            android:paddingVertical="0dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="0dp"
+            android:text="@string/billFragment_transactions"
+            android:textColor="#000000"
+            app:cornerRadius="0dp"
+            app:iconPadding="0dp"
+            app:strokeColor="#000000"
+            app:strokeWidth="2dp" />
+
+    </TableRow>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_billFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp" />
+
 </LinearLayout>
