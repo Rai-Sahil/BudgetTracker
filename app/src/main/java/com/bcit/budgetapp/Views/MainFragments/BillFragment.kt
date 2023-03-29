@@ -14,6 +14,8 @@ import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.Views.bill_recycler
 import com.bcit.budgetapp.Views.transaction_recycler
+import com.bcit.budgetapp.databinding.FragmentBillBinding
+import com.bcit.budgetapp.databinding.FragmentExpenseBinding
 
 
 /**
@@ -24,9 +26,8 @@ import com.bcit.budgetapp.Views.transaction_recycler
 class BillFragment : Fragment()
 {
     private val budgetViewModel: BudgetViewModel by activityViewModels()
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var billButton: Button
-    private lateinit var transactionButton: Button
+    private var _binding: FragmentBillBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -38,10 +39,10 @@ class BillFragment : Fragment()
         println("hi")
         view.isEnabled = false
         view.background.alpha = 0
-        transactionButton.isEnabled = true
-        transactionButton.background.alpha = 255
-        recyclerView.adapter = bill_recycler(budgetViewModel.budget.bills)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.buttonBilFragTransactions.isEnabled = true
+        binding.buttonBilFragTransactions.background.alpha = 255
+        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
+        binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
     }
 
     public fun transactionButtonClick(view: View)
@@ -49,11 +50,11 @@ class BillFragment : Fragment()
         println("hello")
         view.isEnabled = false
         view.background.alpha = 0
-        billButton.isEnabled = true
-        billButton.background.alpha = 255
+        binding.buttonBillFragBills.isEnabled = true
+        binding.buttonBillFragBills.background.alpha = 255
 
-        recyclerView.adapter = transaction_recycler(budgetViewModel.budget.transactions)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.budget.transactions)
+        binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
 
     }
 
@@ -62,23 +63,21 @@ class BillFragment : Fragment()
         savedInstanceState: Bundle?
     ): View?
     {
-        var view = inflater.inflate(R.layout.fragment_bill, container, false)
-        recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_billFragment)
-        billButton = view.findViewById<Button>(R.id.button_billFrag_bills)
-        transactionButton = view.findViewById<Button>(R.id.button_bilFrag_transactions)
-
-        billButton.setOnClickListener { billButtonClick(it) }
-        transactionButton.setOnClickListener { transactionButtonClick(it) }
-
-        billButton.isEnabled = false
-        billButton.background.alpha = 0
-
-        recyclerView.adapter = bill_recycler(budgetViewModel.budget.bills)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-
+        _binding = FragmentBillBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        return view
+        return binding.root
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
+        binding.buttonBillFragBills.setOnClickListener { billButtonClick(it) }
+        binding.buttonBilFragTransactions.setOnClickListener { transactionButtonClick(it) }
+        binding.buttonBillFragBills.isEnabled = false
+        binding.buttonBillFragBills.background.alpha = 0
+
+        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
+        binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
+        super.onViewCreated(view, savedInstanceState)
+    }
 }
