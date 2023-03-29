@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bcit.budgetapp.Models.Bill
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.Models.Transaction
 
 
-class bill_recycler(private val mList: List<Bill>) :
-    RecyclerView.Adapter<bill_recycler.ViewHolder>()
+class transaction_recycler(private val mList: List<Transaction>) :
+    RecyclerView.Adapter<transaction_recycler.ViewHolder>()
 {
 
     // Holds the views
