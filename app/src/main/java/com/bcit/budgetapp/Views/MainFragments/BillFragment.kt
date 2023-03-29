@@ -36,7 +36,6 @@ class BillFragment : Fragment()
 
     public fun billButtonClick(view: View)
     {
-        println("hi")
         view.isEnabled = false
         view.background.alpha = 0
         binding.buttonBilFragTransactions.isEnabled = true
@@ -47,12 +46,10 @@ class BillFragment : Fragment()
 
     public fun transactionButtonClick(view: View)
     {
-        println("hello")
         view.isEnabled = false
         view.background.alpha = 0
         binding.buttonBillFragBills.isEnabled = true
         binding.buttonBillFragBills.background.alpha = 255
-
         binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.budget.transactions)
         binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
 

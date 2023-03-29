@@ -23,5 +23,6 @@
     <string name="expenseFragment_date">Date</string>
     <string name="billFragment_transactions">Transactions</string>
     <string name="menu_bill_trans">Bills and Transactions</string>
+    <string name="billFragment_freq">Freq:</string>
     >>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>

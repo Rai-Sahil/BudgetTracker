@@ -8,24 +8,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:layout_weight="0"
+        android:layout_weight="1"
         app:cardCornerRadius="20dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="0">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="88dp"
                 android:layout_height="91dp"
                 android:layout_weight="0"
-                app:srcCompat="@drawable/reciept" />
+                app:srcCompat="@drawable/bill" />
 
             <TableLayout
                 android:layout_width="93dp"
                 android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/billFragment_due" />
+
+                </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -62,14 +75,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/billFragment_due" />
+                        android:text="@string/billFragment_freq" />
 
                 </TableRow>
 
             </TableLayout>
 
             <TableLayout
-                android:layout_width="207dp"
+                android:layout_width="209dp"
                 android:layout_height="match_parent">
 
                 <TableRow
@@ -110,6 +123,21 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="TextView" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/budget_freq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="TextView" />
+
                 </TableRow>
 
             </TableLayout>
