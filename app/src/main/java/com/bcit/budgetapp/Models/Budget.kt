@@ -12,11 +12,10 @@ class Budget
     public val bills = ArrayList<Bill>()
 
     //Database
-    lateinit var db: FirebaseFirestore
+    var db: FirebaseFirestore = Firebase.firestore
 
     public fun addTransaction(transaction: Transaction)
     {
-        db = Firebase.firestore
 
         db.collection("Transaction")
             .add(transaction)
@@ -32,6 +31,16 @@ class Budget
 
     public fun addBill(bill: Bill)
     {
+
+        db.collection("Bills")
+            .add(bill)
+            .addOnSuccessListener { documentReference ->
+                Log.d("ADD BILL", "Added with ${documentReference.id}")
+            }
+            .addOnFailureListener{ e ->
+                Log.w("ADD BILL", "Failed with ", e)
+            }
+
         bills.add(bill)
     }
 

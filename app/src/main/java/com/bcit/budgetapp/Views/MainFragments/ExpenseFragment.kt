@@ -16,6 +16,8 @@ import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.databinding.FragmentExpenseBinding
 import java.sql.Date
 
+val userID: String = "sahilrai"
+
 class ExpenseFragment : Fragment()
 {
     private val budgetViewModel: BudgetViewModel by activityViewModels()
@@ -78,12 +80,12 @@ class ExpenseFragment : Fragment()
 
         if(binding.checkBoxExpense.isChecked)
         {
-            val bill = Bill(amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory), (binding.expenseSpinnerFreq.selectedItem as BillType))
+            val bill = Bill(userID, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory), (binding.expenseSpinnerFreq.selectedItem as BillType))
             budgetViewModel.budget.addBill(bill)
         }
         else
         {
-            val transaction = Transaction(amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory))
+            val transaction = Transaction(userID, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory))
             budgetViewModel.budget.addTransaction(transaction)
         }
 

@@ -10,6 +10,6 @@ public enum class BillType
     WEEKLY
 }
 
-class Bill(amount: Double, date: Date, category: TransactionCategory, val billType: BillType): Transaction(amount, date, category)
+class Bill(userUniqueID: String, amount: Double, date: Date, category: TransactionCategory, val billType: BillType): Transaction(userUniqueID, amount, date, category)
 {
 }

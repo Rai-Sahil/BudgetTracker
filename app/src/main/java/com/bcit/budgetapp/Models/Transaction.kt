@@ -15,6 +15,6 @@ enum class TransactionCategory
     GAS
 }
 
-open class Transaction(val amount: Double, val date: Date, val category: TransactionCategory)
+open class Transaction(val userUniqueID: String, val amount: Double, val date: Date, val category: TransactionCategory)
 {
 }
