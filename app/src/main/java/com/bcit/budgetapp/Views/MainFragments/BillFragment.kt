@@ -2,14 +2,14 @@ package com.bcit.budgetapp.Views.MainFragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.*
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.Views.bill_recycler
@@ -34,24 +34,36 @@ class BillFragment : Fragment()
         super.onCreate(savedInstanceState)
     }
 
-    public fun billButtonClick(view: View)
+    public fun buttonCLick(view: View)
     {
-        view.isEnabled = false
-        view.background.alpha = 0
-        binding.buttonBilFragTransactions.isEnabled = true
-        binding.buttonBilFragTransactions.background.alpha = 255
-        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
-        binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
+        val button = view as Button
+        val otherButton: Button
+        val sortTypes: List<TransactionCategory>
+        if(button.text == "Bills")
+        {
+            otherButton = binding.buttonBilFragTransactions
+            sortTypes = TransactionCategory.values().filter { it > TransactionCategory.CLOTHING }
+            binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
+        }
+        else
+        {
+            otherButton = binding.buttonBillFragBills
+            sortTypes = TransactionCategory.values().filter { it < TransactionCategory.ELECTRICITY }
+            binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.budget.transactions)
+        }
+
+        button.isEnabled = false
+        button.background.alpha = 0
+        otherButton.isEnabled = true
+        otherButton.background.alpha = 255
+
+        val sortAdapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, sortTypes)
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerBillFilter.adapter = sortAdapter
     }
 
-    public fun transactionButtonClick(view: View)
+    public fun setupSortSpinner()
     {
-        view.isEnabled = false
-        view.background.alpha = 0
-        binding.buttonBillFragBills.isEnabled = true
-        binding.buttonBillFragBills.background.alpha = 255
-        binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.budget.transactions)
-        binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
 
     }
 
@@ -68,13 +80,16 @@ class BillFragment : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
-        binding.buttonBillFragBills.setOnClickListener { billButtonClick(it) }
-        binding.buttonBilFragTransactions.setOnClickListener { transactionButtonClick(it) }
-        binding.buttonBillFragBills.isEnabled = false
-        binding.buttonBillFragBills.background.alpha = 0
+        binding.buttonBillFragBills.setOnClickListener { buttonCLick(it) }
+        binding.buttonBilFragTransactions.setOnClickListener { buttonCLick(it) }
+
+        binding.buttonBillFragBills.performClick()
+        setupSortSpinner()
 
         binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
         binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
         super.onViewCreated(view, savedInstanceState)
     }
+
+
 }

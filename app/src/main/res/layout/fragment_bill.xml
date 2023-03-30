@@ -73,7 +73,53 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_billFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp" />
+        android:layout_height="535dp"
+        android:layout_margin="0dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#80FFC107">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:backgroundTint="#4E3E3E"
+            android:gravity="center"
+            android:text="@string/billFrag_filter" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:backgroundTint="#4E3E3E"
+            android:gravity="center"
+            android:text="@string/billFrag_sort" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:background="#80FFEB3B">
+
+        <Spinner
+            android:id="@+id/spinner_bill_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#4E3E3E" />
+
+        <Spinner
+            android:id="@+id/spinner_bill_sort"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#4E3E3E" />
+    </TableRow>
 
 </LinearLayout>
