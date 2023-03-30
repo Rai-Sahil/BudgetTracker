@@ -33,7 +33,6 @@ class ExpenseFragment : Fragment()
     ): View?
     {
         _binding = FragmentExpenseBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
         return binding.root
     }
 
