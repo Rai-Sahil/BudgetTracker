@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +26,7 @@ class BudgetFragment : Fragment()
     private var param1: String? = null
     private var param2: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,16 @@ class BudgetFragment : Fragment()
     {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_budget, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //setup the Spinner
+        val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_subcat)
+        val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values())
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
     }
 
     companion object

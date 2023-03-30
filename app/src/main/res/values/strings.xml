@@ -26,5 +26,7 @@
     <string name="billFragment_freq">Freq:</string>
     <string name="billFrag_sort">Sort</string>
     <string name="billFrag_filter">Filter</string>
+    <string name="budgetFragment_totalBudget">Your Total Budget:</string>
+    <string name="budgetFragment_updateButton">UPDATE</string>
     >>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>
