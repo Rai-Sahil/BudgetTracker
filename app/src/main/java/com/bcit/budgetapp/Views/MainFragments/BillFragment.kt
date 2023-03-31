@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bcit.budgetapp.Models.Transaction
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.bill_recycler
@@ -107,7 +106,7 @@ class BillFragment : Fragment()
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
             {
-                //(binding.recyclerViewBillFragment.adapter as bill_recycler).sort(binding.spinnerBillSort.getItemAtPosition(position) as SortType)
+                (binding.recyclerViewBillFragment.adapter as sortFilterRecycler).sort(binding.spinnerBillSort.getItemAtPosition(position) as SortType)
             }
         }
 
@@ -119,7 +118,7 @@ class BillFragment : Fragment()
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
             {
-
+                (binding.recyclerViewBillFragment.adapter as sortFilterRecycler).filter(binding.spinnerBillFilter.getItemAtPosition(position) as TransactionCategory, budgetViewModel.budget)
             }
         }
 

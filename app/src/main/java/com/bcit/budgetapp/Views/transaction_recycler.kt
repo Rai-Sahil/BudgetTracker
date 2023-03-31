@@ -5,12 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bcit.budgetapp.Models.Budget
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.Models.Transaction
+import com.bcit.budgetapp.Models.TransactionCategory
+import com.bcit.budgetapp.Views.MainFragments.SortType
+import com.bcit.budgetapp.Views.MainFragments.sortFilterRecycler
 
 
-class transaction_recycler(private val mList: List<Transaction>) :
-    RecyclerView.Adapter<transaction_recycler.ViewHolder>()
+class transaction_recycler(private var mList: List<Transaction>) :
+    RecyclerView.Adapter<transaction_recycler.ViewHolder>(), sortFilterRecycler
 {
 
     // Holds the views
@@ -42,6 +46,23 @@ class transaction_recycler(private val mList: List<Transaction>) :
     override fun getItemCount(): Int
     {
         return mList.size
+    }
+
+    override fun sort(sortType: SortType)
+    {
+        mList = when(sortType)
+        {
+            SortType.LEAST_RECENT -> mList.sortedBy {it.date}
+            SortType.MOST_RECENT -> mList.sortedByDescending { it.date }
+        }
+
+        notifyDataSetChanged()
+    }
+
+    override fun filter(filterType: TransactionCategory, budget: Budget)
+    {
+        mList = budget.transactions.filter { it.category == filterType }
+        notifyDataSetChanged()
     }
 
 }
