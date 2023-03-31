@@ -6,13 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bcit.budgetapp.Models.Bill
+import com.bcit.budgetapp.Models.Budget
+import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
+import com.bcit.budgetapp.Views.MainFragments.SortType
+import com.bcit.budgetapp.Views.MainFragments.sortFilterRecycler
 
 
-class bill_recycler(private val mList: List<Bill>) :
-    RecyclerView.Adapter<bill_recycler.ViewHolder>()
+class bill_recycler(private var mList: List<Bill>) :
+    RecyclerView.Adapter<bill_recycler.ViewHolder>(), sortFilterRecycler
 {
-
     // Holds the views
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView)
     {
@@ -45,4 +48,20 @@ class bill_recycler(private val mList: List<Bill>) :
         return mList.size
     }
 
+    override fun sort(sortType: SortType)
+    {
+        mList = when(sortType)
+        {
+            SortType.LEAST_RECENT -> mList.sortedBy {it.date}
+            SortType.MOST_RECENT -> mList.sortedByDescending { it.date }
+        }
+
+        notifyDataSetChanged()
+    }
+
+    override fun filter(filterType: TransactionCategory, budget: Budget)
+    {
+        mList = budget.bills.filter { it.category == filterType }
+        notifyDataSetChanged()
+    }
 }
