@@ -55,7 +55,15 @@
         android:layout_marginTop="240dp"
         android:background="@color/yellow_dark"
         android:text="@string/budgetFragment_updateButton"
-        android:textSize="22sp"/>
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_budgetFragment_subCatList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="310dp"/>
 
 
 </FrameLayout>

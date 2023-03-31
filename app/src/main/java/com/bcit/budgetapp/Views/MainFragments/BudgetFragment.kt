@@ -48,9 +48,10 @@ class BudgetFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //setup the Spinner
         val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_subcat)
-        val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values())
+        val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values().take(5))
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
     }
