@@ -59,9 +59,17 @@ class bill_recycler(private var mList: List<Bill>) :
         notifyDataSetChanged()
     }
 
-    override fun filter(filterType: TransactionCategory, budget: Budget)
+    override fun filter(filterType: TransactionCategory, sortType: SortType, budget: Budget)
     {
-        mList = budget.bills.filter { it.category == filterType }
-        notifyDataSetChanged()
+        mList = if(filterType == TransactionCategory.NONE)
+        {
+            budget.bills
+        } else
+        {
+            budget.bills.filter { it.category == filterType }
+
+        }
+
+        sort(sortType)
     }
 }

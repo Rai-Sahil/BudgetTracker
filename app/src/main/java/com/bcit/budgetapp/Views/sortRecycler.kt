@@ -6,5 +6,5 @@ import com.bcit.budgetapp.Models.TransactionCategory
 interface sortFilterRecycler
 {
     public fun sort(sortType: SortType)
-    public fun filter(filterType: TransactionCategory, budget: Budget)
+    public fun filter(filterType: TransactionCategory, sortType: SortType, budget: Budget)
 }
