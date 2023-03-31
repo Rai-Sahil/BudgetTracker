@@ -56,13 +56,13 @@ class ExpenseFragment : Fragment()
 
         if(isChecked)
         {
-            val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it > TransactionCategory.BILL })
+            val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it > TransactionCategory.BILLS })
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.expenseSpinner.adapter = adapter
         }
         else
         {
-            val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it < TransactionCategory.BILL })
+            val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it < TransactionCategory.BILLS })
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.expenseSpinner.adapter = adapter
         }
@@ -93,7 +93,7 @@ class ExpenseFragment : Fragment()
 
     private fun setupSpinners(view: View)
     {
-        val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it < TransactionCategory.BILL })
+        val adapter = ArrayAdapter<TransactionCategory>(view.context, android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it < TransactionCategory.BILLS })
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.expenseSpinner.adapter = adapter
 

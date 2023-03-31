@@ -44,13 +44,13 @@ class BillFragment : Fragment()
         if(button.text == "Bills")
         {
             otherButton = binding.buttonBilFragTransactions
-            sortTypes = TransactionCategory.values().filter { it > TransactionCategory.BILL }
+            sortTypes = TransactionCategory.values().filter { it > TransactionCategory.BILLS }
             binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
         }
         else
         {
             otherButton = binding.buttonBillFragBills
-            sortTypes = TransactionCategory.values().filter { it < TransactionCategory.BILL }
+            sortTypes = TransactionCategory.values().filter { it < TransactionCategory.BILLS }
             binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.budget.transactions)
         }
 
