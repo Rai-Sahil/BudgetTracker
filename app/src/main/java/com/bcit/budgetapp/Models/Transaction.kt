@@ -8,6 +8,7 @@ enum class TransactionCategory
     GROCERIES,
     TRANSPORTATION,
     CLOTHING,
+    BILL,
     ELECTRICITY,
     HOUSING,
     WATER,

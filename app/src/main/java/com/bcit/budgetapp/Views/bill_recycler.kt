@@ -7,9 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bcit.budgetapp.Models.Bill
 import com.bcit.budgetapp.R
+import com.bcit.budgetapp.Views.MainFragments.SortType
 
 
-class bill_recycler(private val mList: List<Bill>) :
+class bill_recycler(private var mList: List<Bill>) :
     RecyclerView.Adapter<bill_recycler.ViewHolder>()
 {
 
@@ -45,4 +46,9 @@ class bill_recycler(private val mList: List<Bill>) :
         return mList.size
     }
 
+    fun sort(sortType: SortType)
+    {
+        mList = mList.sortedBy {it.date}
+        notifyDataSetChanged()
+    }
 }
