@@ -4,6 +4,7 @@ import java.util.*
 
 enum class TransactionCategory
 {
+    NONE,
     ENTERTAINMENT,
     GROCERIES,
     TRANSPORTATION,

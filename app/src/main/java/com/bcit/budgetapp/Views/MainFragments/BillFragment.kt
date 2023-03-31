@@ -44,13 +44,13 @@ class BillFragment : Fragment()
         if(button.text == "Bills")
         {
             otherButton = binding.buttonBilFragTransactions
-            sortTypes = TransactionCategory.values().filter { it > TransactionCategory.BILLS }
+            sortTypes = TransactionCategory.values().filter { it > TransactionCategory.BILLS || it == TransactionCategory.NONE}
             binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
         }
         else
         {
             otherButton = binding.buttonBillFragBills
-            sortTypes = TransactionCategory.values().filter { it < TransactionCategory.BILLS }
+            sortTypes = TransactionCategory.values().filter { it < TransactionCategory.BILLS || it == TransactionCategory.NONE}
             binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.budget.transactions)
         }
 
@@ -118,7 +118,8 @@ class BillFragment : Fragment()
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
             {
-                (binding.recyclerViewBillFragment.adapter as sortFilterRecycler).filter(binding.spinnerBillFilter.getItemAtPosition(position) as TransactionCategory, budgetViewModel.budget)
+                (binding.recyclerViewBillFragment.adapter as sortFilterRecycler).filter(binding.spinnerBillFilter.getItemAtPosition(position) as TransactionCategory,
+                    binding.spinnerBillSort.selectedItem as SortType, budgetViewModel.budget)
             }
         }
 
