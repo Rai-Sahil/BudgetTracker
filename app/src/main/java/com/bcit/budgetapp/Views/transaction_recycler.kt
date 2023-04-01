@@ -12,7 +12,7 @@ import com.bcit.budgetapp.Models.Transaction
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.MainFragments.SortType
-import com.bcit.budgetapp.Views.MainFragments.sortFilterRecycler
+import com.bcit.budgetapp.Views.sortFilterRecycler
 
 
 class transaction_recycler(private var mList: List<Transaction>) :
@@ -65,11 +65,23 @@ class transaction_recycler(private var mList: List<Transaction>) :
 
     override fun filter(filterType: TransactionCategory, sortType: SortType, budgetViewModel: BudgetViewModel)
     {
-        if(filterType != TransactionCategory.NONE)
+        if(budgetViewModel.allTransaction.value != null)
         {
-            mList = mList.filter { it.category == filterType }
-            notifyDataSetChanged()
+            mList = if (filterType != TransactionCategory.NONE)
+            {
+                budgetViewModel.allTransaction.value!!.filter { it.category == filterType }
+            } else
+            {
+                budgetViewModel.allTransaction.value!!
+            }
+
+            sort(sortType)
         }
+        else
+        {
+            mList = listOf()
+        }
+
     }
 
 }
