@@ -6,9 +6,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bcit.budgetapp.Models.Bill
+import com.bcit.budgetapp.Models.Transaction
 import com.bcit.budgetapp.Models.TransactionCategory
+import com.bcit.budgetapp.R
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.bill_recycler
 import com.bcit.budgetapp.Views.transaction_recycler
@@ -51,7 +56,13 @@ class BillFragment : Fragment()
         {
             otherButton = binding.buttonBillFragBills
             sortTypes = TransactionCategory.values().filter { it < TransactionCategory.BILLS || it == TransactionCategory.NONE}
-            binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.transactions)
+
+            val transactionObserver = Observer<List<Transaction>>{ _transactions ->
+                binding.recyclerViewBillFragment.adapter = transaction_recycler(_transactions)
+            }
+
+            budgetViewModel.allTransaction.observe(viewLifecycleOwner, transactionObserver)
+
         }
 
         button.isEnabled = false
@@ -95,7 +106,13 @@ class BillFragment : Fragment()
         binding.buttonBillFragBills.performClick()
         setupSortSpinner(view)
 
-        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.bills)
+        val billObserver = Observer<List<Bill>>{ _bills ->
+            binding.recyclerViewBillFragment.adapter = bill_recycler(_bills)
+        }
+
+        budgetViewModel.allBills.observe(viewLifecycleOwner, billObserver)
+
+
         binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
 
         binding.spinnerBillSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
