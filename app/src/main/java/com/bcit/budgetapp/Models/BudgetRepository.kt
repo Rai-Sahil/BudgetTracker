@@ -20,4 +20,25 @@ class BudgetRepository {
                 Log.w("ADD BUDGET", "Failed with ", e)
             }
     }
+
+    fun getBudget(userUniqueID: String, category: TransactionCategory, onComplete: (budget: Budget?) -> Unit) {
+        db.collection("Budget")
+            .whereEqualTo("userUniqueID", userUniqueID)
+            .whereEqualTo("category", category)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.documents.isNotEmpty()) {
+                    val document = querySnapshot.documents[0]
+                    val budget = document.toObject(Budget::class.java)
+                    onComplete(budget)
+                } else {
+                    onComplete(null)
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("GET BUDGET", "Failed with ", e)
+                onComplete(null)
+            }
+    }
+
 }
