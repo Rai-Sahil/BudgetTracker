@@ -25,7 +25,7 @@ class TransactionRepository {
             }
     }
 
-    fun getUserFlow(): Flow<List<Transaction>> {
+    fun getTransactionFlow(): Flow<List<Transaction>> {
         return db.collection("Transaction")
             .snapshots().map {
                     value: QuerySnapshot -> value.toObjects()

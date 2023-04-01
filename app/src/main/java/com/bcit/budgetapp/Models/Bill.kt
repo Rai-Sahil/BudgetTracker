@@ -2,7 +2,7 @@ package com.bcit.budgetapp.Models
 
 import java.util.*
 
-public enum class BillType
+enum class BillType
 {
     ANNUALLY,
     MONTHLY,
@@ -10,6 +10,9 @@ public enum class BillType
     WEEKLY
 }
 
-class Bill(userUniqueID: String, amount: Double, date: Date, category: TransactionCategory, val billType: BillType): Transaction(userUniqueID, amount, date, category)
-{
-}
+class Bill(userUniqueID: String? = null,
+           amount: Double? = null,
+           date: Date? = null,
+           category: TransactionCategory? = null,
+           val billType: BillType? = null)
+    : Transaction(userUniqueID, amount, date, category)

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bcit.budgetapp.Models.Bill
 import com.bcit.budgetapp.Models.Transaction
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
@@ -105,7 +106,13 @@ class BillFragment : Fragment()
         binding.buttonBillFragBills.performClick()
         setupSortSpinner(view)
 
-        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.bills)
+        val billObserver = Observer<List<Bill>>{ _bills ->
+            binding.recyclerViewBillFragment.adapter = bill_recycler(_bills)
+        }
+
+        budgetViewModel.allBills.observe(viewLifecycleOwner, billObserver)
+
+
         binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
 
         binding.spinnerBillSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener

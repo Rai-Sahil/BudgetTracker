@@ -16,6 +16,7 @@ class BudgetViewModel : ViewModel()
 
     //Live Data
     val allTransaction: MutableLiveData<List<Transaction>> = MutableLiveData<List<Transaction>>()
+    val allBills: MutableLiveData<List<Bill>> = MutableLiveData<List<Bill>>()
 
     private val budgetRepository = BudgetRepository()
     private val transactionRepository = TransactionRepository()
@@ -23,6 +24,7 @@ class BudgetViewModel : ViewModel()
 
     init{
         observeTransactions()
+        observerBills()
     }
 
     public fun addTransaction(transaction: Transaction)
@@ -54,12 +56,22 @@ class BudgetViewModel : ViewModel()
         return total
     }
 
-    fun observeTransactions(){
+    private fun observeTransactions(){
         val scope = CoroutineScope(Dispatchers.Main)
 
         scope.launch {
-            transactionRepository.getUserFlow().collect{
+            transactionRepository.getTransactionFlow().collect{
                 allTransaction.value = it
+            }
+        }
+    }
+
+    private fun observerBills(){
+        val scope = CoroutineScope(Dispatchers.Main)
+
+        scope.launch {
+            billRepository.getBillsFlow().collect{
+                allBills.value = it
             }
         }
     }
