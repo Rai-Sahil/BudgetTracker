@@ -9,6 +9,7 @@ import com.bcit.budgetapp.Models.Bill
 import com.bcit.budgetapp.Models.Budget
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
+import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.MainFragments.SortType
 import com.bcit.budgetapp.Views.MainFragments.sortFilterRecycler
 
@@ -59,14 +60,14 @@ class bill_recycler(private var mList: List<Bill>) :
         notifyDataSetChanged()
     }
 
-    override fun filter(filterType: TransactionCategory, sortType: SortType, budget: Budget)
+    override fun filter(filterType: TransactionCategory, sortType: SortType, budgetViewModel: BudgetViewModel)
     {
         mList = if(filterType == TransactionCategory.NONE)
         {
-            budget.bills
+            budgetViewModel.bills
         } else
         {
-            budget.bills.filter { it.category == filterType }
+            budgetViewModel.bills.filter { it.category == filterType }
 
         }
 

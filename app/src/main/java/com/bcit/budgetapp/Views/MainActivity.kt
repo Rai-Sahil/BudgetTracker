@@ -18,7 +18,6 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
     private lateinit var navController: NavController
-    public val budget = Budget()
 
     override fun onCreate(savedInstanceState: Bundle?)
     {

@@ -81,12 +81,12 @@ class ExpenseFragment : Fragment()
         if(binding.checkBoxExpense.isChecked)
         {
             val bill = Bill(userID, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory), (binding.expenseSpinnerFreq.selectedItem as BillType))
-            budgetViewModel.budget.addBill(bill)
+            budgetViewModel.addBill(bill)
         }
         else
         {
             val transaction = Transaction(userID, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory))
-            budgetViewModel.budget.addTransaction(transaction)
+            budgetViewModel.addTransaction(transaction)
         }
 
     }

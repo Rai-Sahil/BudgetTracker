@@ -45,13 +45,13 @@ class BillFragment : Fragment()
         {
             otherButton = binding.buttonBilFragTransactions
             sortTypes = TransactionCategory.values().filter { it > TransactionCategory.BILLS || it == TransactionCategory.NONE}
-            binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
+            binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.bills)
         }
         else
         {
             otherButton = binding.buttonBillFragBills
             sortTypes = TransactionCategory.values().filter { it < TransactionCategory.BILLS || it == TransactionCategory.NONE}
-            binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.budget.transactions)
+            binding.recyclerViewBillFragment.adapter = transaction_recycler(budgetViewModel.transactions)
         }
 
         button.isEnabled = false
@@ -95,7 +95,7 @@ class BillFragment : Fragment()
         binding.buttonBillFragBills.performClick()
         setupSortSpinner(view)
 
-        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.budget.bills)
+        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.bills)
         binding.recyclerViewBillFragment.layoutManager = LinearLayoutManager(activity)
 
         binding.spinnerBillSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
@@ -119,7 +119,7 @@ class BillFragment : Fragment()
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
             {
                 (binding.recyclerViewBillFragment.adapter as sortFilterRecycler).filter(binding.spinnerBillFilter.getItemAtPosition(position) as TransactionCategory,
-                    binding.spinnerBillSort.selectedItem as SortType, budgetViewModel.budget)
+                    binding.spinnerBillSort.selectedItem as SortType, budgetViewModel)
             }
         }
 

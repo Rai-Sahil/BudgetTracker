@@ -7,8 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.fragment.app.activityViewModels
+import com.bcit.budgetapp.Models.Budget
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
+import com.bcit.budgetapp.ViewModels.BudgetViewModel
+import com.bcit.budgetapp.databinding.FragmentBudgetBinding
+import com.bcit.budgetapp.databinding.FragmentExpenseBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +31,9 @@ class BudgetFragment : Fragment()
     private var param1: String? = null
     private var param2: String? = null
 
+    private val budgetViewModel: BudgetViewModel by activityViewModels()
+    private var _binding: FragmentBudgetBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -41,8 +49,8 @@ class BudgetFragment : Fragment()
         savedInstanceState: Bundle?
     ): View?
     {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_budget, container, false)
+        _binding = FragmentBudgetBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,10 +58,18 @@ class BudgetFragment : Fragment()
 
 
         //setup the Spinner
-        val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_subcat)
+        val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_cat)
         val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values().take(5))
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
+        binding.buttonBudgetFragmentUpdate.setOnClickListener { view -> updateBudgetButtonClick(view) }
+        //binding.buttonExpenseAdd.setOnClickListener{it -> addExpenseButtonClick(it) }
+
+    }
+
+    private fun updateBudgetButtonClick(view: View){
+        val budget = Budget(userID, 100.0, TransactionCategory.GROCERIES)
+        budgetViewModel.addBudget(budget)
     }
 
     companion object
