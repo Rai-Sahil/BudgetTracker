@@ -65,13 +65,9 @@ class transaction_recycler(private var mList: List<Transaction>) :
 
     override fun filter(filterType: TransactionCategory, sortType: SortType, budgetViewModel: BudgetViewModel)
     {
-        if(filterType == TransactionCategory.NONE)
+        if(filterType != TransactionCategory.NONE)
         {
-            mList = budgetViewModel.transactions
-        }
-        else
-        {
-            mList = budgetViewModel.transactions.filter { it.category == filterType }
+            mList = mList.filter { it.category == filterType }
             notifyDataSetChanged()
         }
     }

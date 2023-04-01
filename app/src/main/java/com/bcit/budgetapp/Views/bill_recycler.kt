@@ -66,12 +66,13 @@ class bill_recycler(private var mList: List<Bill>) :
     {
         mList = if(filterType == TransactionCategory.NONE)
         {
-            budgetViewModel.bills
+            mList
         } else
         {
-            budgetViewModel.bills.filter { it.category == filterType }
+            mList.filter { it.category == filterType }
 
         }
+
 
         sort(sortType)
     }

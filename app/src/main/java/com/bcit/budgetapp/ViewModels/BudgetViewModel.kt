@@ -30,16 +30,14 @@ class BudgetViewModel : ViewModel()
     public fun addTransaction(transaction: Transaction)
     {
         transactionRepository.addTransaction(transaction)
-        transactions.add(transaction)
     }
 
     public fun addBill(bill: Bill)
     {
         billRepository.addBill(bill)
-        bills.add(bill)
     }
 
-    public fun addBudget(budget: Budget){
+    fun addBudget(budget: Budget){
         budgetRepository.addBudget(budget)
         budgets.add(budget)
     }
