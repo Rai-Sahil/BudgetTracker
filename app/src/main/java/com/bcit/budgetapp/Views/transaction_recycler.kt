@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.bcit.budgetapp.Models.Budget
 import com.bcit.budgetapp.R
@@ -17,6 +18,7 @@ import com.bcit.budgetapp.Views.MainFragments.sortFilterRecycler
 class transaction_recycler(private var mList: List<Transaction>) :
     RecyclerView.Adapter<transaction_recycler.ViewHolder>(), sortFilterRecycler
 {
+    val viewModel = BudgetViewModel()
 
     // Holds the views
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView)
@@ -37,10 +39,11 @@ class transaction_recycler(private var mList: List<Transaction>) :
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        var date = (mList[position].date.month + 1).toString() + "-" + mList[position].date.day.toString() + "-" + mList[position].date.year.toString()
-        holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position].category.name
+        var date = (mList[position].date!!.month + 1).toString() + "-" + mList[position].date!!.day.toString() + "-" + mList[position].date!!.year.toString()
+        holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position].category!!.name
         holder.itemView.findViewById<TextView>(R.id.budget_due).text = date
         holder.itemView.findViewById<TextView>(R.id.budget_amount).text = mList[position].amount.toString()
+
     }
 
     // return the number of the items in the list
