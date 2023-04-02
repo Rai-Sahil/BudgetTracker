@@ -106,6 +106,7 @@ class BillFragment : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
+        budgetViewModel.getLastAccessForUser(userID)
         binding.buttonBillFragBills.setOnClickListener { buttonCLick(it) }
         binding.buttonBilFragTransactions.setOnClickListener { buttonCLick(it) }
 

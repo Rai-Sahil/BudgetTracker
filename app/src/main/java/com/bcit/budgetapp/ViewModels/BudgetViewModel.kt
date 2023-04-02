@@ -1,9 +1,13 @@
 package com.bcit.budgetapp.ViewModels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bcit.budgetapp.Models.*
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +23,7 @@ class BudgetViewModel : ViewModel()
 {
     val userID: String = "sahilrai"
     val transactions = ArrayList<Transaction>()
+    var db: FirebaseFirestore = Firebase.firestore
 
     //Live Data
     val allTransaction: MutableLiveData<List<Transaction>> = MutableLiveData<List<Transaction>>()
@@ -29,11 +34,59 @@ class BudgetViewModel : ViewModel()
     private val transactionRepository = TransactionRepository()
     private val billRepository = BillRepository()
 
-    private var lastDate = Date.from(Instant.now())
+    private lateinit var lastDate : Date
+    private lateinit var dateId : String
     init{
         observeTransactions()
         observerBills()
         loadBudgets()
+    }
+
+    fun getLastAccessForUser(userUniqueID: String) {
+        db.collection("LastAccessDates")
+            .whereEqualTo("userUniqueID", userUniqueID)
+            .get()
+            .addOnSuccessListener { documents ->
+                if(documents.isEmpty)
+                {
+                    addLastAccessForUser(userUniqueID)
+                }
+                else
+                {
+                    lastDate = documents.first().toObject(LastAccessDate::class.java).date!!
+                    dateId = documents.first().id
+                }
+
+            }
+            .addOnFailureListener { e ->
+                addLastAccessForUser(userUniqueID)
+            }
+    }
+
+    private fun addLastAccessForUser(userUniqueID: String){
+        val lastAccessDate = LastAccessDate(userUniqueID, Date.from(Instant.now()))
+        db.collection("LastAccessDates")
+            .add(lastAccessDate)
+            .addOnSuccessListener { documentReference ->
+                Log.d("ADD date", "Added with ${documentReference.id}")
+                lastDate = lastAccessDate.date!!
+                dateId = documentReference.id
+            }
+            .addOnFailureListener{ e ->
+                Log.w("ADD date", "Failed with ", e)
+            }
+    }
+
+    fun updateLastAccessForUser(userUniqueID: String) {
+        db.collection("LastAccessDates")
+            .document(dateId)
+            .update("date", Date.from(Instant.now()))
+            .addOnSuccessListener {
+                Log.d("UPDATE Date", "Update succeeded")
+            }
+            .addOnFailureListener{ e ->
+                Log.w("UPDATE dateT", "Failed with ", e)
+            }
     }
 
     fun addTransaction(transaction: Transaction)
@@ -161,6 +214,6 @@ class BudgetViewModel : ViewModel()
                 }
             }
         }
-        lastDate = Date.from(Instant.now())
+        updateLastAccessForUser(userID)
     }
 }
