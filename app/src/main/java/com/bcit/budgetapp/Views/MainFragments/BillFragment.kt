@@ -111,7 +111,6 @@ class BillFragment : Fragment()
 
         binding.buttonBillFragBills.performClick()
         setupSortSpinner(view)
-
         val billObserver = Observer<List<Bill>>{ _bills ->
             binding.recyclerViewBillFragment.adapter = bill_recycler(_bills)
         }

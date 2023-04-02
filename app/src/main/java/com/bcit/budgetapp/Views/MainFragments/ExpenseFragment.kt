@@ -1,6 +1,9 @@
 package com.bcit.budgetapp.Views.MainFragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +26,7 @@ class ExpenseFragment : Fragment()
     private val budgetViewModel: BudgetViewModel by activityViewModels()
     private var _binding: FragmentExpenseBinding? = null
     private val binding get() = _binding!!
+    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -38,6 +42,7 @@ class ExpenseFragment : Fragment()
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +52,16 @@ class ExpenseFragment : Fragment()
         binding.expenseSpinnerFreq.isEnabled = false
 
         binding.checkBoxExpense.setOnCheckedChangeListener { view, isChecked -> onChecked(view, isChecked)}
-        binding.buttonExpenseAdd.setOnClickListener{it -> addExpenseButtonClick(it) }
+
+        var text = binding.editTextNumberDecimalExpense.text
+        if (text.isNotEmpty() || text.toString() != "0") {
+            binding.buttonExpenseAdd.setOnClickListener{
+                addExpenseButtonClick(it)
+                binding.buttonExpenseAdd.text = "✔"
+                handler.postDelayed({ binding.buttonExpenseAdd.text = "Submit" }, 3000L)
+                showPopup()
+            }
+        }
     }
 
     private fun onChecked(view: View, isChecked: Boolean)
@@ -103,4 +117,20 @@ class ExpenseFragment : Fragment()
     }
 
 
+    // Pop up window
+    @SuppressLint("MissingInflatedId")
+    fun showPopup() {
+        val popupView =
+            LayoutInflater.from(this.context).inflate(R.layout.popup_after_adding_expense, null)
+
+        val popupWindow = PopupWindow(
+            popupView,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0)
+        handler.postDelayed({ popupWindow.dismiss() }, 3000L)
+    }
 }
