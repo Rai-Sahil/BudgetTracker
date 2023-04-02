@@ -12,7 +12,6 @@ class BudgetViewModel : ViewModel()
     //val budget = Budget(clothing, 200)
     val budgets = ArrayList<Budget>()
     val transactions = ArrayList<Transaction>()
-    val bills = ArrayList<Bill>()
 
     //Live Data
     val allTransaction: MutableLiveData<List<Transaction>> = MutableLiveData<List<Transaction>>()
