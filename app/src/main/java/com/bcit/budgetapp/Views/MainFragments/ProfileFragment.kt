@@ -57,13 +57,23 @@ class ProfileFragment : Fragment()
         binding.textViewProfileBudgetAmount.text = budgetViewModel.getTotalBudget().toString()
         //binding.textViewProfileBudgetAmountSpent.text = budgetViewModel.getTotalSpent().toString()
 
+        var spentObserver = Observer<Boolean> { _ ->
+            binding.textViewProfileBudgetAmountSpent.text = budgetViewModel.getTotalSpent().toString()
+            binding.textViewProfileBudgetAmount.text = budgetViewModel.getTotalBudget().toString()
+        }
+
         var budgetObserver = Observer<ArrayList<Budget>> { budgetList ->
             val budgets = budgetList.filter { it.category != TransactionCategory.NONE }
             (binding.recyclerViewProfileBudgetCategory.adapter as budget_recycler).update(budgets as ArrayList<Budget>)
-            //binding.textViewProfileBudgetAmountSpent.text = budgetViewModel.getTotalSpent().toString()
+            binding.textViewProfileBudgetAmount.text = budgetViewModel.getTotalBudget().toString()
         }
 
         budgetViewModel.budgets.observe(viewLifecycleOwner, budgetObserver)
+        budgetViewModel.dateGot.observe(viewLifecycleOwner, spentObserver)
+        if(budgetViewModel.dateGot.value == true)
+        {
+            binding.textViewProfileBudgetAmount.text = budgetViewModel.getTotalBudget().toString()
+        }
     }
 
 }

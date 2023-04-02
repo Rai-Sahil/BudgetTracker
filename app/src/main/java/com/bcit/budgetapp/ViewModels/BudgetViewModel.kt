@@ -36,6 +36,7 @@ class BudgetViewModel : ViewModel()
 
     private lateinit var lastDate : Date
     private lateinit var dateId : String
+    public var dateGot: MutableLiveData<Boolean> = MutableLiveData()
     init{
         getLastAccessForUser(userID)
         observeTransactions()
@@ -56,6 +57,7 @@ class BudgetViewModel : ViewModel()
                 {
                     lastDate = documents.first().toObject(LastAccessDate::class.java).date!!
                     dateId = documents.first().id
+                    dateGot.value = true
                 }
 
             }
@@ -72,6 +74,7 @@ class BudgetViewModel : ViewModel()
                 Log.d("ADD date", "Added with ${documentReference.id}")
                 lastDate = lastAccessDate.date!!
                 dateId = documentReference.id
+                dateGot.value = true
             }
             .addOnFailureListener{ e ->
                 Log.w("ADD date", "Failed with ", e)
