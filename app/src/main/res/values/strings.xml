@@ -4,7 +4,6 @@
     <string name="hello_blank_fragment">Welcome!</string>
     <string name="profileFragment_name">Welcome!</string>
     <string name="profileFragment_budgetTitle">MONTHLY BUDGET:</string>
-=======
     <string name="menu_bill">Bills</string>
     <string name="menu_budget">Budgets</string>
     <string name="menu_expense">Expenses</string>
@@ -30,14 +29,12 @@
     <string name="budgetFragment_updateButton">UPDATE</string>
     <string name="budgetRecycler_budgetType">Budget Type:</string>
     <string name="budgetRecycler_budgetAmount">Budget Amount:</string>
-<<<<<<< HEAD
     <string name="username">username</string>
     <string name="password">Password</string>
     <string name="budgettracker">BudgetTracker</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="confirm_password">Confirm Password</string>
-=======
     <string name="profile_spent">Spent: </string>
     <string name="profile_budgetAmount">Budget Amount:</string>
     <string name="profile_spent_upper">"Spent: "</string>
