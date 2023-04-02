@@ -7,6 +7,13 @@ import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
+import java.util.Date
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.milliseconds
 
 class BudgetViewModel : ViewModel()
 {
@@ -22,6 +29,7 @@ class BudgetViewModel : ViewModel()
     private val transactionRepository = TransactionRepository()
     private val billRepository = BillRepository()
 
+    private var lastDate = Date.from(Instant.now())
     init{
         observeTransactions()
         observerBills()
@@ -64,13 +72,20 @@ class BudgetViewModel : ViewModel()
         }
     }
 
-    public fun getTotalSpent(): Double
+    public fun getTotalSpent(transactionCategory: TransactionCategory = TransactionCategory.NONE): Double
     {
         var total = 0.0
 
-        for(transaction: Transaction in transactions)
+        for(transaction: Transaction in allTransaction.value!!)
         {
-            total += transaction.amount!!
+            if(transactionCategory == TransactionCategory.NONE)
+            {
+                total += transaction.amount!!
+            }
+            else if(transaction.category == transactionCategory)
+            {
+                total += transaction.amount!!
+            }
         }
 
         return total
@@ -112,4 +127,40 @@ class BudgetViewModel : ViewModel()
         }
     }
 
+    public fun updateTransactions()
+    {
+        val currentDate: Date = Date.from(Instant.now())
+        val distanceDays = ChronoUnit.DAYS.between(Instant.now(), lastDate.toInstant());
+
+        if(distanceDays <= -1)
+        {
+            for(bill in allBills.value!!)
+            {
+                val newDate: Date = bill.date?.clone() as Date
+
+
+                if(bill.billType == BillType.ANNUALLY)
+                {
+                    newDate.year = currentDate.year
+                    val transaction: Transaction = Transaction(bill.userUniqueID, bill.amount, newDate, bill.category)
+
+                    if(transaction.date!! <  currentDate && transaction.date > lastDate)
+                    {
+                        addTransaction(transaction)
+                    }
+                }
+                else if(bill.billType == BillType.MONTHLY)
+                {
+                    newDate.year = currentDate.year
+                    newDate.month = currentDate.month
+                    val transaction: Transaction = Transaction(bill.userUniqueID, bill.amount, newDate, bill.category)
+                    if(transaction.date!! < currentDate && transaction.date > lastDate)
+                    {
+                        addTransaction(transaction)
+                    }
+                }
+            }
+        }
+        lastDate = Date.from(Instant.now())
+    }
 }

@@ -85,7 +85,7 @@ class ExpenseFragment : Fragment()
     private fun addExpenseButtonClick(view: View)
     {
         var amount = 0.0
-        val date = Date(binding.datePickerExpense.year, binding.datePickerExpense.month, binding.datePickerExpense.dayOfMonth)
+        val date = Date(binding.datePickerExpense.year - 1900, binding.datePickerExpense.month, binding.datePickerExpense.dayOfMonth)
 
         if(binding.editTextNumberDecimalExpense.text.toString().isNotEmpty())
         {

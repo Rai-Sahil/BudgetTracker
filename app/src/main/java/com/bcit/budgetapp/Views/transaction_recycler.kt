@@ -39,9 +39,9 @@ class transaction_recycler(private var mList: List<Transaction>) :
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        var date = (mList[position].date!!.month + 1).toString() + "-" + mList[position].date!!.day.toString() + "-" + mList[position].date!!.year.toString()
+
         holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position].category!!.name
-        holder.itemView.findViewById<TextView>(R.id.budget_due).text = date
+        holder.itemView.findViewById<TextView>(R.id.budget_due).text = mList[position].date.toString()
         holder.itemView.findViewById<TextView>(R.id.budget_amount).text = mList[position].amount.toString()
 
     }
@@ -67,6 +67,7 @@ class transaction_recycler(private var mList: List<Transaction>) :
     {
         if(budgetViewModel.allTransaction.value != null)
         {
+            budgetViewModel.updateTransactions()
             mList = if (filterType != TransactionCategory.NONE)
             {
                 budgetViewModel.allTransaction.value!!.filter { it.category == filterType }

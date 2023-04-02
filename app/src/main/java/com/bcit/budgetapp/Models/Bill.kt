@@ -5,9 +5,7 @@ import java.util.*
 enum class BillType
 {
     ANNUALLY,
-    MONTHLY,
-    BIWEEKLY,
-    WEEKLY
+    MONTHLY
 }
 
 class Bill(userUniqueID: String? = null,
