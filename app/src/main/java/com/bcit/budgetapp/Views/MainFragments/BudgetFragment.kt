@@ -57,7 +57,6 @@ class BudgetFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         //setup the Spinner
         val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_cat)
         val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values().take(5))

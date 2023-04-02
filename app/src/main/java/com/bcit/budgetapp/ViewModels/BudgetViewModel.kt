@@ -37,7 +37,6 @@ class BudgetViewModel : ViewModel()
     fun addBill(bill: Bill)
     {
         billRepository.addBill(bill)
-        bills.add(bill)
     }
 
     fun addOrUpdateBudget(budget: Budget){
@@ -104,6 +103,7 @@ class BudgetViewModel : ViewModel()
             }
         }
     }
+
     private fun loadBudgets(){
         budgets.value = ArrayList()
         budgetRepository.getBudgetsForUser(userID) { budget ->
