@@ -30,5 +30,8 @@
     <string name="budgetFragment_updateButton">UPDATE</string>
     <string name="budgetRecycler_budgetType">Budget Type:</string>
     <string name="budgetRecycler_budgetAmount">Budget Amount:</string>
+    <string name="profile_spent">Spent: </string>
+    <string name="profile_budgetAmount">Budget Amount:</string>
+    <string name="profile_spent_upper">"Spent: "</string>
     >>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>

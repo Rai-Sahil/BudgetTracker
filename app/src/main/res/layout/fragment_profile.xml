@@ -8,6 +8,7 @@
     tools:context=".Views.MainFragments.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/textView_profile_name"
         android:layout_width="wrap_content"
@@ -37,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="280dp"
         android:orientation="horizontal">
 
         <TextView
@@ -53,6 +54,35 @@
 
         <TextView
             android:id="@+id/textView_profile_budgetAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="monospace"
+            android:text="TextView"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linLayout_profile_budgetspent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="320dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView_profile_budgetTitleSpent"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:fontFamily="monospace"
+            android:text="@string/profile_spent_upper"
+            android:textColor="#060D32"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView_profile_budgetAmountSpent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
