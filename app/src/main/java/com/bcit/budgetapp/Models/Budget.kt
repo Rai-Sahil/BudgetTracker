@@ -1,11 +1,18 @@
 package com.bcit.budgetapp.Models
 
-import android.util.Log
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.Exclude
 
-class Budget(val userUniqueID: String, val amount: Double, val category: TransactionCategory)
+class Budget(val userUniqueID: String? = null, val amount: Double? = null, val category: TransactionCategory?=null)
 {
+    @get: Exclude
+    var id: String? = null
+
+    override fun equals(o: Any?): Boolean {
+        if (o !is Budget){
+            return false
+        }
+
+        return (userUniqueID == o.userUniqueID && category == o.category)
+    }
 
 }
