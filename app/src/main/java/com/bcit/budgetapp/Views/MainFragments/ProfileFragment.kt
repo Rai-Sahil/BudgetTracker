@@ -50,18 +50,17 @@ class ProfileFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
-        budgetViewModel.updateLastAccessForUser(budgetViewModel.userID)
         binding.recyclerViewProfileBudgetCategory.adapter =
             budgetViewModel.budgets.value?.let { budget -> budget_recycler(budget.filter { it.category != TransactionCategory.NONE }, budgetViewModel) }
         binding.recyclerViewProfileBudgetCategory.layoutManager = LinearLayoutManager(activity)
 
         binding.textViewProfileBudgetAmount.text = budgetViewModel.getTotalBudget().toString()
-        binding.textViewProfileBudgetAmountSpent.text = budgetViewModel.getTotalSpent().toString()
+        //binding.textViewProfileBudgetAmountSpent.text = budgetViewModel.getTotalSpent().toString()
 
         var budgetObserver = Observer<ArrayList<Budget>> { budgetList ->
             val budgets = budgetList.filter { it.category != TransactionCategory.NONE }
             (binding.recyclerViewProfileBudgetCategory.adapter as budget_recycler).update(budgets as ArrayList<Budget>)
-            binding.textViewProfileBudgetAmountSpent.text = budgetViewModel.getTotalSpent().toString()
+            //binding.textViewProfileBudgetAmountSpent.text = budgetViewModel.getTotalSpent().toString()
         }
 
         budgetViewModel.budgets.observe(viewLifecycleOwner, budgetObserver)
