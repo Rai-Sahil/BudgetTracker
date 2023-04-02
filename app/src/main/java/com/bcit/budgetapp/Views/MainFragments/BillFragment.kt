@@ -16,6 +16,7 @@ import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.bill_recycler
+import com.bcit.budgetapp.Views.sortFilterRecycler
 import com.bcit.budgetapp.Views.transaction_recycler
 import com.bcit.budgetapp.databinding.FragmentBillBinding
 
@@ -110,7 +111,7 @@ class BillFragment : Fragment()
 
         binding.buttonBillFragBills.performClick()
         setupSortSpinner(view)
-
+        binding.recyclerViewBillFragment.adapter = bill_recycler(budgetViewModel.bills)
         val billObserver = Observer<List<Bill>>{ _bills ->
             binding.recyclerViewBillFragment.adapter = bill_recycler(_bills)
         }
