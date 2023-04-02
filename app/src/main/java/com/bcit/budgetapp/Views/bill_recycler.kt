@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bcit.budgetapp.Models.Bill
-import com.bcit.budgetapp.Models.Budget
+import com.bcit.budgetapp.Views.sortFilterRecycler
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.MainFragments.SortType
-import com.bcit.budgetapp.Views.MainFragments.sortFilterRecycler
 
 
 class bill_recycler(private var mList: List<Bill>) :
@@ -64,15 +63,21 @@ class bill_recycler(private var mList: List<Bill>) :
 
     override fun filter(filterType: TransactionCategory, sortType: SortType, budgetViewModel: BudgetViewModel)
     {
-        mList = if(filterType == TransactionCategory.NONE)
+        if(budgetViewModel.allBills.value != null)
         {
-            budgetViewModel.bills
-        } else
-        {
-            budgetViewModel.bills.filter { it.category == filterType }
+            mList = if (filterType != TransactionCategory.NONE)
+            {
+                budgetViewModel.allBills.value!!.filter { it.category == filterType }
+            } else
+            {
+                budgetViewModel.allBills.value!!
+            }
 
+            sort(sortType)
         }
-
-        sort(sortType)
+        else
+        {
+            mList = listOf()
+        }
     }
 }
