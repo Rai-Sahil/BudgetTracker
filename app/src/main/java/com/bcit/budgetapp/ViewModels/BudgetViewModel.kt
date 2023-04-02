@@ -36,13 +36,15 @@ class BudgetViewModel : ViewModel()
 
     private lateinit var lastDate : Date
     private lateinit var dateId : String
+    public var dateGot: MutableLiveData<Boolean> = MutableLiveData()
     init{
+        getLastAccessForUser(userID)
         observeTransactions()
         observerBills()
         loadBudgets()
     }
 
-    fun getLastAccessForUser(userUniqueID: String) {
+    private fun getLastAccessForUser(userUniqueID: String) {
         db.collection("LastAccessDates")
             .whereEqualTo("userUniqueID", userUniqueID)
             .get()
@@ -55,6 +57,7 @@ class BudgetViewModel : ViewModel()
                 {
                     lastDate = documents.first().toObject(LastAccessDate::class.java).date!!
                     dateId = documents.first().id
+                    dateGot.value = true
                 }
 
             }
@@ -71,6 +74,7 @@ class BudgetViewModel : ViewModel()
                 Log.d("ADD date", "Added with ${documentReference.id}")
                 lastDate = lastAccessDate.date!!
                 dateId = documentReference.id
+                dateGot.value = true
             }
             .addOnFailureListener{ e ->
                 Log.w("ADD date", "Failed with ", e)
@@ -127,17 +131,27 @@ class BudgetViewModel : ViewModel()
 
     public fun getTotalSpent(transactionCategory: TransactionCategory = TransactionCategory.NONE): Double
     {
+        updateTransactions()
         var total = 0.0
+        val currentDate = Date.from(Instant.now())
 
         for(transaction: Transaction in allTransaction.value!!)
         {
-            if(transactionCategory == TransactionCategory.NONE)
+            if(transaction.date?.month == currentDate.month && transaction.date.year == currentDate.year)
             {
-                total += transaction.amount!!
-            }
-            else if(transaction.category == transactionCategory)
-            {
-                total += transaction.amount!!
+                if (transactionCategory == TransactionCategory.NONE) // give total of all
+                {
+                    total += transaction.amount!!
+                } else if (transactionCategory == TransactionCategory.BILLS) // give total of bills only
+                {
+                    if (transaction.category!! > TransactionCategory.BILLS)
+                    {
+                        total += transaction.amount!!
+                    }
+                } else if (transaction.category == transactionCategory) //give total of specified category
+                {
+                    total += transaction.amount!!
+                }
             }
         }
 
@@ -146,6 +160,8 @@ class BudgetViewModel : ViewModel()
 
     fun getTotalBudget(): Double {
         var totalBudget = 0.0
+
+
         for (budget: Budget in budgets.value!!){
             totalBudget += budget.amount!!
         }

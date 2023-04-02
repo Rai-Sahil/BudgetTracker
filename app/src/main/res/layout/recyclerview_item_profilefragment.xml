@@ -23,7 +23,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="0"
-                app:srcCompat="@drawable/reciept" />
+                app:srcCompat="@drawable/budget" />
 
             <TableLayout
                 android:layout_width="93dp"
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="@string/billFragment_amount" />
+                        android:text="@string/profile_budgetAmount" />
                 </TableRow>
 
                 <TableRow
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/expenseFragment_date" />
+                        android:text="@string/profile_spent" />
 
                 </TableRow>
 
@@ -80,7 +80,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/budget_type"
+                        android:id="@+id/budget_cat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -93,7 +93,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/budget_amount"
+                        android:id="@+id/budget_limit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -107,7 +107,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/budget_due"
+                        android:id="@+id/budget_spent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

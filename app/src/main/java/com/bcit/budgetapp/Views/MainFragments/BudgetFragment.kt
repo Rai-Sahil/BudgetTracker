@@ -59,7 +59,7 @@ class BudgetFragment : Fragment()
 
         //setup the Spinner
         val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_cat)
-        val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values().take(5))
+        val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it <= TransactionCategory.BILLS && it != TransactionCategory.NONE })
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
         binding.buttonBudgetFragmentUpdate.setOnClickListener { view -> updateBudgetButtonClick(view) }

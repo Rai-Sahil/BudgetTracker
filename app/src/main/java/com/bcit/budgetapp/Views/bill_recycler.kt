@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bcit.budgetapp.Models.Bill
-import com.bcit.budgetapp.Views.sortFilterRecycler
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.ViewModels.BudgetViewModel

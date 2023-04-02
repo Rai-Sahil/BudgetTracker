@@ -30,11 +30,17 @@
     <string name="budgetFragment_updateButton">UPDATE</string>
     <string name="budgetRecycler_budgetType">Budget Type:</string>
     <string name="budgetRecycler_budgetAmount">Budget Amount:</string>
+<<<<<<< HEAD
     <string name="username">username</string>
     <string name="password">Password</string>
     <string name="budgettracker">BudgetTracker</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="confirm_password">Confirm Password</string>
+=======
+    <string name="profile_spent">Spent: </string>
+    <string name="profile_budgetAmount">Budget Amount:</string>
+    <string name="profile_spent_upper">"Spent: "</string>
+>>>>>>> 178ec421594f659c63fb67a18a0956ce9f8fce3e
     >>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>
