@@ -14,6 +14,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.Views.FragmentNavigation
 import com.bcit.budgetapp.Views.MainActivity
+import com.bcit.budgetapp.databinding.FragmentBudgetBinding
+import com.bcit.budgetapp.databinding.FragmentSignUpBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -27,6 +29,9 @@ class SignUpFragment : Fragment()
     private lateinit var password: EditText
     private lateinit var confirmPassword: EditText
     private lateinit var firebaseAuth: FirebaseAuth
+    private var _binding: FragmentSignUpBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -39,20 +44,26 @@ class SignUpFragment : Fragment()
     ): View?
     {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_sign_up, container, false)
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
+//        var view = inflater.inflate(R.layout.fragment_sign_up, container, false)
 
-        username = view.findViewById(R.id.edittext_signUpFragment_username)
-        password = view.findViewById(R.id.edittext_signUpFragment_password)
-        confirmPassword = view.findViewById(R.id.edittext_signUpFragment_confirmPassword)
+        username = binding.edittextSignUpFragmentUsername
+//            view.findViewById(R.id.edittext_signUpFragment_username)
+        password = binding.edittextSignUpFragmentPassword
+//            view.findViewById(R.id.edittext_signUpFragment_password)
+        confirmPassword = binding.edittextSignUpFragmentConfirmPassword
+//            view.findViewById(R.id.edittext_signUpFragment_confirmPassword)
 
         firebaseAuth = Firebase.auth
 
-        view.findViewById<Button>(R.id.button_signUpFragment_login).setOnClickListener{
+//        view.findViewById<Button>(R.id.button_signUpFragment_login)
+            binding.buttonSignUpFragmentLogin.setOnClickListener{
                 var navRegister = activity as FragmentNavigation
                 navRegister.navigateFrag(LoginFragment(), false)
             }
 
-        view.findViewById<Button>(R.id.button_signUpFragment_register).setOnClickListener {
+//        view.findViewById<Button>(R.id.button_signUpFragment_register)
+            binding.buttonSignUpFragmentRegister.setOnClickListener {
             validateEmptyForm()
         }
 

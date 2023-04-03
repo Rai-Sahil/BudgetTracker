@@ -58,12 +58,15 @@ class BudgetFragment : Fragment()
         super.onViewCreated(view, savedInstanceState)
 
         //setup the Spinner
-        val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_cat)
-        val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item, TransactionCategory.values().filter { it <= TransactionCategory.BILLS && it != TransactionCategory.NONE })
+//        val spinner = view.findViewById<Spinner>(R.id.spinner_budgetFragment_cat)
+        val spinner = binding.spinnerBudgetFragmentCat
+        val adapter = ArrayAdapter<TransactionCategory>(requireContext(), android.R.layout.simple_spinner_item,
+            TransactionCategory.values().filter { it <= TransactionCategory.BILLS && it != TransactionCategory.NONE })
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
         binding.buttonBudgetFragmentUpdate.setOnClickListener { view -> updateBudgetButtonClick(view) }
-        val totalBudgetAmount = view.findViewById<TextView>(R.id.textView_budgetFragment_amount)
+        val totalBudgetAmount = binding.textViewBudgetFragmentAmount
+//            view.findViewById<TextView>(R.id.textView_budgetFragment_amount)
 
         var budgetObserver = Observer<ArrayList<Budget>> { budgetList ->
             budgetAdapter?.update(budgetList)
@@ -89,7 +92,8 @@ class BudgetFragment : Fragment()
     }
 
     private fun setupRecyclerView(view: View) {
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_budgetFragment_catList)
+        val recyclerView = binding.recyclerViewBudgetFragmentCatList
+//            view.findViewById<RecyclerView>(R.id.recyclerView_budgetFragment_catList)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
         val data = budgetViewModel.budgets
         budgetAdapter = BudgetAdapter(budgetViewModel.budgets?.value)
