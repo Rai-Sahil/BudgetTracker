@@ -1,5 +1,6 @@
 package com.bcit.budgetapp.Views.AuthenticationFragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -19,6 +20,8 @@ import com.bcit.budgetapp.ViewModels.UserViewModel
 import com.bcit.budgetapp.Views.AuthenticationActivity
 import com.bcit.budgetapp.Views.FragmentNavigation
 import com.bcit.budgetapp.Views.MainActivity
+import com.bcit.budgetapp.databinding.FragmentBudgetBinding
+import com.bcit.budgetapp.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -32,37 +35,44 @@ class LoginFragment : Fragment()
     private lateinit var password: EditText
 
     private lateinit var firebaseAuth: FirebaseAuth
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View?
     {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_login, container, false)
+//        var view = inflater.inflate(R.layout.fragment_login, container, false)
 
-        username = view.findViewById(R.id.edittext_loginFragment_username)
-        password = view.findViewById(R.id.edittext_loginFragment_password)
+        username = binding.edittextLoginFragmentUsername
+//            view.findViewById(R.id.edittext_loginFragment_username)
+        password = binding.edittextLoginFragmentPassword
+//            view.findViewById(R.id.edittext_loginFragment_password)
 
         firebaseAuth = Firebase.auth
 
-        view.findViewById<Button>(R.id.button_loginFragment_login).setOnClickListener {
+//        view.findViewById<Button>(R.id.button_loginFragment_login)
+        binding.buttonLoginFragmentLogin.setOnClickListener {
             validateEmptyForm()
         }
 
-        view.findViewById<Button>(R.id.button_loginFragment_register)
-            .setOnClickListener{
-                var navRegister = activity as FragmentNavigation
+//        view.findViewById<Button>(R.id.button_loginFragment_register).setOnClickListener{
+            binding.buttonLoginFragmentRegister.setOnClickListener{
+                val navRegister = activity as FragmentNavigation
                 navRegister.navigateFrag(SignUpFragment(), false)
             }
 
 
-        return view
+        return binding.root
     }
 
     private fun validateEmptyForm(){

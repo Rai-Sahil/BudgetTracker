@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/yellow_mid"
     tools:context=".Views.MainFragments.BudgetFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -53,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="240dp"
-        android:background="@color/yellow_dark"
         android:text="@string/budgetFragment_updateButton"
         android:textColor="@color/black"
         android:textSize="22sp" />

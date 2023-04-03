@@ -81,12 +81,13 @@ class BudgetViewModel : ViewModel()
             }
     }
 
-    fun updateLastAccessForUser(userUniqueID: String) {
+    private fun updateLastAccessForUser(userUniqueID: String) {
+        val date = Date.from(Instant.now())
         db.collection("LastAccessDates")
             .document(dateId)
-            .update("date", Date.from(Instant.now()))
+            .update("date", date)
             .addOnSuccessListener {
-                Log.d("UPDATE Date", "Update succeeded")
+                lastDate = date
             }
             .addOnFailureListener{ e ->
                 Log.w("UPDATE dateT", "Failed with ", e)
@@ -199,10 +200,7 @@ class BudgetViewModel : ViewModel()
     public fun updateTransactions()
     {
         val currentDate: Date = Date.from(Instant.now())
-        val distanceDays = ChronoUnit.DAYS.between(Instant.now(), lastDate.toInstant());
 
-        if(distanceDays <= -1)
-        {
             for(bill in allBills.value!!)
             {
                 val newDate: Date = bill.date?.clone() as Date
@@ -229,7 +227,7 @@ class BudgetViewModel : ViewModel()
                     }
                 }
             }
-        }
+
         updateLastAccessForUser(userID)
     }
 }
