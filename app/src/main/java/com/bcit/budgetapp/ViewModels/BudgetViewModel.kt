@@ -4,26 +4,22 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bcit.budgetapp.Models.*
-import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.Duration
 import java.time.Instant
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit
 import java.util.Date
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.milliseconds
 
 class BudgetViewModel : ViewModel()
 {
     val userID: String = "sahilrai"
     val transactions = ArrayList<Transaction>()
     var db: FirebaseFirestore = Firebase.firestore
+    var user = FirebaseAuth.getInstance().currentUser
 
     //Live Data
     val allTransaction: MutableLiveData<List<Transaction>> = MutableLiveData<List<Transaction>>()
@@ -173,7 +169,7 @@ class BudgetViewModel : ViewModel()
         val scope = CoroutineScope(Dispatchers.Main)
 
         scope.launch {
-            transactionRepository.getTransactionFlow().collect{
+            transactionRepository.getTransactionFlow().collect{ transactions
                 allTransaction.value = it
             }
         }

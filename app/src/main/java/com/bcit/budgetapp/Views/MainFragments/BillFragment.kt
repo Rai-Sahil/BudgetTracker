@@ -19,6 +19,7 @@ import com.bcit.budgetapp.Views.bill_recycler
 import com.bcit.budgetapp.Views.sortFilterRecycler
 import com.bcit.budgetapp.Views.transaction_recycler
 import com.bcit.budgetapp.databinding.FragmentBillBinding
+import com.google.firebase.auth.FirebaseAuth
 
 enum class SortType
 {
@@ -35,6 +36,7 @@ class BillFragment : Fragment()
     private val budgetViewModel: BudgetViewModel by activityViewModels()
     private var _binding: FragmentBillBinding? = null
     private val binding get() = _binding!!
+    private val user = FirebaseAuth.getInstance().currentUser
 
 
     override fun onCreate(savedInstanceState: Bundle?)

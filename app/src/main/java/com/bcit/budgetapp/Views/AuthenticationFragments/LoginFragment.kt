@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -60,9 +61,12 @@ class LoginFragment : Fragment()
 
         firebaseAuth = Firebase.auth
 
+        val userViewModel: UserViewModel by activityViewModels()
+
 //        view.findViewById<Button>(R.id.button_loginFragment_login)
         binding.buttonLoginFragmentLogin.setOnClickListener {
             validateEmptyForm()
+            userViewModel.loggedInUser(username.text.toString())
         }
 
 //        view.findViewById<Button>(R.id.button_loginFragment_register).setOnClickListener{
@@ -109,9 +113,6 @@ class LoginFragment : Fragment()
             password.text.toString()).addOnCompleteListener { task ->
 
             if (task.isSuccessful){
-                val userViewModel = ViewModelProvider(AuthenticationActivity())[UserViewModel::class.java]
-
-                userViewModel.loggedInUser(username.text.toString())
 
 //                val userViewModel: UserViewModel by activityViewModels()
 //                userViewModel.loggedInUser(username.text.toString())

@@ -6,10 +6,10 @@ import com.bcit.budgetapp.Models.User
 
 class UserViewModel : ViewModel() {
 
-    val username = MutableLiveData<String>()
+    val user = User()
 
     fun loggedInUser(ID: String){
-        username.value = ID
+        user.username = ID
     }
 
 }

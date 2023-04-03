@@ -21,6 +21,8 @@ import com.bcit.budgetapp.ViewModels.UserViewModel
 import com.bcit.budgetapp.Views.BudgetAdapter
 import com.bcit.budgetapp.Views.MainActivity
 import com.bcit.budgetapp.databinding.FragmentBudgetBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 class BudgetFragment : Fragment()
 {
@@ -29,7 +31,7 @@ class BudgetFragment : Fragment()
     private var _binding: FragmentBudgetBinding? = null
     private val binding get() = _binding!!
     private var budgetAdapter: BudgetAdapter? = null;
-    val userViewModel = ViewModelProvider(MainActivity()).get(UserViewModel::class.java)
+    private val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -80,10 +82,8 @@ class BudgetFragment : Fragment()
             category = binding.spinnerBudgetFragmentCat.selectedItem as TransactionCategory
         }
 
-        userViewModel.username.observe(viewLifecycleOwner, Observer {
-            val budget = Budget(it, amount, category)
-            budgetViewModel.addOrUpdateBudget(budget)
-        })
+        val budget = Budget(user?.email, amount, category)
+        budgetViewModel.addOrUpdateBudget(budget)
     }
 
     private fun setupRecyclerView(view: View) {

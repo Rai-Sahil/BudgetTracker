@@ -67,7 +67,7 @@ class SignUpFragment : Fragment()
             validateEmptyForm()
         }
 
-        return view
+        return binding.root
     }
 
     private fun validateEmptyForm(){

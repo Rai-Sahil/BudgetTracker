@@ -12,13 +12,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.bcit.budgetapp.Models.*
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.ViewModels.UserViewModel
-import com.bcit.budgetapp.Views.MainActivity
 import com.bcit.budgetapp.databinding.FragmentExpenseBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.sql.Date
 import java.time.Instant
 
@@ -29,7 +30,8 @@ class ExpenseFragment : Fragment()
     private var _binding: FragmentExpenseBinding? = null
     private val binding get() = _binding!!
     private val handler = Handler()
-    private val userViewModel = ViewModelProvider(MainActivity()).get(UserViewModel::class.java)
+    var user = FirebaseAuth.getInstance().currentUser
+
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -52,6 +54,7 @@ class ExpenseFragment : Fragment()
         super.onViewCreated(view, savedInstanceState)
 
         setupSpinners(view)
+
 
         binding.expenseSpinnerFreq.isEnabled = false
 
@@ -98,22 +101,19 @@ class ExpenseFragment : Fragment()
             amount = binding.editTextNumberDecimalExpense.text.toString().toDouble()
         }
 
+        val userViewModel: UserViewModel by activityViewModels()
+
         if(binding.checkBoxExpense.isChecked)
         {
-           userViewModel.username.observe(viewLifecycleOwner, Observer {
-               val bill = Bill(it, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory), (binding.expenseSpinnerFreq.selectedItem as BillType))
-               budgetViewModel.addBill(bill)
-           })
+            val bill = Bill(user?.email, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory), (binding.expenseSpinnerFreq.selectedItem as BillType))
+            budgetViewModel.addBill(bill)
+
         }
         else
         {
-
-            userViewModel.username.observe(viewLifecycleOwner, Observer {
-                val transaction = Transaction(it, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory))
-                budgetViewModel.addTransaction(transaction)
-            })
+            val transaction = Transaction(user?.email, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory))
+            budgetViewModel.addTransaction(transaction)
         }
-
     }
 
     private fun setupSpinners(view: View)

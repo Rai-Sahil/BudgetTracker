@@ -10,6 +10,8 @@ import com.bcit.budgetapp.Models.Transaction
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.MainFragments.SortType
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 
 class transaction_recycler(private var mList: List<Transaction>) :
@@ -36,7 +38,6 @@ class transaction_recycler(private var mList: List<Transaction>) :
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-
         holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position].category!!.name
         holder.itemView.findViewById<TextView>(R.id.budget_due).text = mList[position].date.toString()
         holder.itemView.findViewById<TextView>(R.id.budget_amount).text = mList[position].amount.toString()

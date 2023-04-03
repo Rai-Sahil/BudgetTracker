@@ -11,11 +11,14 @@ import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.Views.MainFragments.SortType
+import com.google.firebase.auth.FirebaseAuth
 
 
 class bill_recycler(private var mList: List<Bill>) :
     RecyclerView.Adapter<bill_recycler.ViewHolder>(), sortFilterRecycler
 {
+    private val user = FirebaseAuth.getInstance().currentUser
+
     // Holds the views
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView)
     {
@@ -39,7 +42,6 @@ class bill_recycler(private var mList: List<Bill>) :
         holder.itemView.findViewById<TextView>(R.id.budget_due).text = mList[position].amount.toString()
         holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position].date.toString()
         holder.itemView.findViewById<TextView>(R.id.budget_freq).text = mList[position].billType!!.name
-        Log.d("BUDGETS", "Added bill is ${mList.toString()}")
     }
 
     // return the number of the items in the list
