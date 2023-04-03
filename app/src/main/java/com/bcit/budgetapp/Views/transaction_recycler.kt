@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 
 
-class transaction_recycler(private var mList: List<Transaction>) :
+class transaction_recycler(private var mList: List<Transaction?>) :
     RecyclerView.Adapter<transaction_recycler.ViewHolder>(), sortFilterRecycler
 {
     val viewModel = BudgetViewModel()
@@ -38,9 +38,9 @@ class transaction_recycler(private var mList: List<Transaction>) :
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position].category!!.name
-        holder.itemView.findViewById<TextView>(R.id.budget_due).text = mList[position].date.toString()
-        holder.itemView.findViewById<TextView>(R.id.budget_amount).text = mList[position].amount.toString()
+        holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position]?.category!!.name
+        holder.itemView.findViewById<TextView>(R.id.budget_due).text = mList[position]?.date.toString()
+        holder.itemView.findViewById<TextView>(R.id.budget_amount).text = mList[position]?.amount.toString()
 
     }
 
@@ -54,8 +54,8 @@ class transaction_recycler(private var mList: List<Transaction>) :
     {
         mList = when(sortType)
         {
-            SortType.LEAST_RECENT -> mList.sortedBy {it.date}
-            SortType.MOST_RECENT -> mList.sortedByDescending { it.date }
+            SortType.LEAST_RECENT -> mList.sortedBy {it?.date}
+            SortType.MOST_RECENT -> mList.sortedByDescending { it?.date }
         }
 
         notifyDataSetChanged()
@@ -68,7 +68,7 @@ class transaction_recycler(private var mList: List<Transaction>) :
             budgetViewModel.updateTransactions()
             mList = if (filterType != TransactionCategory.NONE)
             {
-                budgetViewModel.allTransaction.value!!.filter { it.category == filterType }
+                budgetViewModel.allTransaction.value!!.filter { it?.category == filterType }
             } else
             {
                 budgetViewModel.allTransaction.value!!

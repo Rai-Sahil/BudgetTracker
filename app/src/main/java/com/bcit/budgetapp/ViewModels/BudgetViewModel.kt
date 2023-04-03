@@ -22,8 +22,8 @@ class BudgetViewModel : ViewModel()
     var user = FirebaseAuth.getInstance().currentUser
 
     //Live Data
-    val allTransaction: MutableLiveData<List<Transaction>> = MutableLiveData<List<Transaction>>()
-    val allBills: MutableLiveData<List<Bill>> = MutableLiveData<List<Bill>>()
+    val allTransaction: MutableLiveData<List<Transaction?>> = MutableLiveData<List<Transaction?>>()
+    val allBills: MutableLiveData<List<Bill?>> = MutableLiveData<List<Bill?>>()
     val budgets: MutableLiveData<ArrayList<Budget>> = MutableLiveData<ArrayList<Budget>>()
 
     private val budgetRepository = BudgetRepository()
@@ -132,9 +132,9 @@ class BudgetViewModel : ViewModel()
         var total = 0.0
         val currentDate = Date.from(Instant.now())
 
-        for(transaction: Transaction in allTransaction.value!!)
+        for(transaction: Transaction? in allTransaction.value!!)
         {
-            if(transaction.date?.month == currentDate.month && transaction.date.year == currentDate.year)
+            if(transaction!!.date?.month == currentDate.month && transaction.date!!.year == currentDate.year)
             {
                 if (transactionCategory == TransactionCategory.NONE) // give total of all
                 {
@@ -169,7 +169,7 @@ class BudgetViewModel : ViewModel()
         val scope = CoroutineScope(Dispatchers.Main)
 
         scope.launch {
-            transactionRepository.getTransactionFlow().collect{ transactions
+            transactionRepository.getTransactionFlow().collect{
                 allTransaction.value = it
             }
         }
@@ -199,7 +199,7 @@ class BudgetViewModel : ViewModel()
 
             for(bill in allBills.value!!)
             {
-                val newDate: Date = bill.date?.clone() as Date
+                val newDate: Date = bill?.date?.clone() as Date
 
 
                 if(bill.billType == BillType.ANNUALLY)
@@ -216,7 +216,8 @@ class BudgetViewModel : ViewModel()
                 {
                     newDate.year = currentDate.year
                     newDate.month = currentDate.month
-                    val transaction: Transaction = Transaction(bill.userUniqueID, bill.amount, newDate, bill.category)
+                    val transaction: Transaction = Transaction(bill.userUniqueID,
+                        bill.amount, newDate, bill.category)
                     if(transaction.date!! < currentDate && transaction.date > lastDate)
                     {
                         addTransaction(transaction)

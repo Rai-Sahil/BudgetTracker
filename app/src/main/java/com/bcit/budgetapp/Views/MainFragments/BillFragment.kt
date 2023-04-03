@@ -54,7 +54,7 @@ class BillFragment : Fragment()
             otherButton = binding.buttonBilFragTransactions
             sortTypes = TransactionCategory.values().filter { it > TransactionCategory.BILLS || it == TransactionCategory.NONE}
 
-            val billObserver = Observer<List<Bill>>{ _bill ->
+            val billObserver = Observer<List<Bill?>>{ _bill ->
                 binding.recyclerViewBillFragment.adapter = bill_recycler(_bill)
             }
 
@@ -65,7 +65,7 @@ class BillFragment : Fragment()
             otherButton = binding.buttonBillFragBills
             sortTypes = TransactionCategory.values().filter { it < TransactionCategory.BILLS || it == TransactionCategory.NONE}
 
-            val transactionObserver = Observer<List<Transaction>>{ _transactions ->
+            val transactionObserver = Observer<List<Transaction?>>{ _transactions ->
                 binding.recyclerViewBillFragment.adapter = transaction_recycler(_transactions)
             }
 
@@ -114,7 +114,7 @@ class BillFragment : Fragment()
         binding.buttonBillFragBills.performClick()
         setupSortSpinner(view)
         binding.recyclerViewBillFragment.adapter = bill_recycler(listOf())
-        val billObserver = Observer<List<Bill>>{ _bills ->
+        val billObserver = Observer<List<Bill?>>{ _bills ->
             binding.recyclerViewBillFragment.adapter = bill_recycler(_bills)
         }
 

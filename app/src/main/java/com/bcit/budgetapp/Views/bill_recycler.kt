@@ -14,7 +14,7 @@ import com.bcit.budgetapp.Views.MainFragments.SortType
 import com.google.firebase.auth.FirebaseAuth
 
 
-class bill_recycler(private var mList: List<Bill>) :
+class bill_recycler(private var mList: List<Bill?>) :
     RecyclerView.Adapter<bill_recycler.ViewHolder>(), sortFilterRecycler
 {
     private val user = FirebaseAuth.getInstance().currentUser
@@ -38,10 +38,10 @@ class bill_recycler(private var mList: List<Bill>) :
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        holder.itemView.findViewById<TextView>(R.id.budget_amount).text = mList[position].category?.name
-        holder.itemView.findViewById<TextView>(R.id.budget_due).text = mList[position].amount.toString()
-        holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position].date.toString()
-        holder.itemView.findViewById<TextView>(R.id.budget_freq).text = mList[position].billType!!.name
+        holder.itemView.findViewById<TextView>(R.id.budget_amount).text = mList[position]?.category?.name
+        holder.itemView.findViewById<TextView>(R.id.budget_due).text = mList[position]?.amount.toString()
+        holder.itemView.findViewById<TextView>(R.id.budget_type).text = mList[position]?.date.toString()
+        holder.itemView.findViewById<TextView>(R.id.budget_freq).text = mList[position]?.billType!!.name
     }
 
     // return the number of the items in the list
@@ -54,8 +54,8 @@ class bill_recycler(private var mList: List<Bill>) :
     {
         mList = when(sortType)
         {
-            SortType.LEAST_RECENT -> mList.sortedBy {it.date}
-            SortType.MOST_RECENT -> mList.sortedByDescending { it.date }
+            SortType.LEAST_RECENT -> mList.sortedBy {it?.date}
+            SortType.MOST_RECENT -> mList.sortedByDescending { it?.date }
         }
 
         notifyDataSetChanged()
@@ -67,7 +67,7 @@ class bill_recycler(private var mList: List<Bill>) :
         {
             mList = if (filterType != TransactionCategory.NONE)
             {
-                budgetViewModel.allBills.value!!.filter { it.category == filterType }
+                budgetViewModel.allBills.value!!.filter { it?.category == filterType }
             } else
             {
                 budgetViewModel.allBills.value!!
