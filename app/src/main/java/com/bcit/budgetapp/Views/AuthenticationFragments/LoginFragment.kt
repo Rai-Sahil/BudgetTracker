@@ -57,7 +57,7 @@ class LoginFragment : Fragment()
         firebaseAuth = Firebase.auth
 
 //        view.findViewById<Button>(R.id.button_loginFragment_login)
-            binding.buttonLoginFragmentLogin.setOnClickListener {
+        binding.buttonLoginFragmentLogin.setOnClickListener {
             validateEmptyForm()
         }
 
