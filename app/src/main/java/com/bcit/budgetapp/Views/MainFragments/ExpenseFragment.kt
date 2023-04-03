@@ -3,6 +3,7 @@ package com.bcit.budgetapp.Views.MainFragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,16 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
-import com.bcit.budgetapp.Models.Bill
-import com.bcit.budgetapp.Models.BillType
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bcit.budgetapp.Models.*
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
 import com.bcit.budgetapp.R
-import com.bcit.budgetapp.Models.Transaction
-import com.bcit.budgetapp.Models.TransactionCategory
+import com.bcit.budgetapp.ViewModels.UserViewModel
+import com.bcit.budgetapp.Views.MainActivity
 import com.bcit.budgetapp.databinding.FragmentExpenseBinding
 import java.sql.Date
 
-val userID: String = "sahilrai"
 
 class ExpenseFragment : Fragment()
 {
@@ -27,6 +28,8 @@ class ExpenseFragment : Fragment()
     private var _binding: FragmentExpenseBinding? = null
     private val binding get() = _binding!!
     private val handler = Handler()
+    private val userViewModel = ViewModelProvider(MainActivity()).get(UserViewModel::class.java)
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -94,13 +97,18 @@ class ExpenseFragment : Fragment()
 
         if(binding.checkBoxExpense.isChecked)
         {
-            val bill = Bill(userID, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory), (binding.expenseSpinnerFreq.selectedItem as BillType))
-            budgetViewModel.addBill(bill)
+           userViewModel.username.observe(viewLifecycleOwner, Observer {
+               val bill = Bill(it, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory), (binding.expenseSpinnerFreq.selectedItem as BillType))
+               budgetViewModel.addBill(bill)
+           })
         }
         else
         {
-            val transaction = Transaction(userID, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory))
-            budgetViewModel.addTransaction(transaction)
+
+            userViewModel.username.observe(viewLifecycleOwner, Observer {
+                val transaction = Transaction(it, amount, date, (binding.expenseSpinner.selectedItem as TransactionCategory))
+                budgetViewModel.addTransaction(transaction)
+            })
         }
 
     }

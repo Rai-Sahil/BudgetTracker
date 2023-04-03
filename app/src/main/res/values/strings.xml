@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Welcome!</string>
     <string name="profileFragment_name">Welcome!</string>
-    <string name="profileFragment_budgetTitle">MONTHLY BUDGET:</string>
+    <string name="profileFragment_budgetTitle">MONTHLY BUDGET : </string>
     <string name="menu_bill">Bills</string>
     <string name="menu_budget">Budgets</string>
     <string name="menu_expense">Expenses</string>
@@ -38,6 +38,4 @@
     <string name="profile_spent">Spent: </string>
     <string name="profile_budgetAmount">Budget Amount:</string>
     <string name="profile_spent_upper">"Spent: "</string>
->>>>>>> 178ec421594f659c63fb67a18a0956ce9f8fce3e
-    >>>>>>> 124db6b1b670dddd35088ee5e32fc326c227dd7a
 </resources>

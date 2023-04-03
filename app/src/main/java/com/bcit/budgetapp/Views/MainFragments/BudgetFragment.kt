@@ -10,26 +10,18 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bcit.budgetapp.Models.Budget
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.R
 import com.bcit.budgetapp.ViewModels.BudgetViewModel
+import com.bcit.budgetapp.ViewModels.UserViewModel
 import com.bcit.budgetapp.Views.BudgetAdapter
+import com.bcit.budgetapp.Views.MainActivity
 import com.bcit.budgetapp.databinding.FragmentBudgetBinding
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BudgetFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BudgetFragment : Fragment()
 {
 
@@ -37,6 +29,7 @@ class BudgetFragment : Fragment()
     private var _binding: FragmentBudgetBinding? = null
     private val binding get() = _binding!!
     private var budgetAdapter: BudgetAdapter? = null;
+    val userViewModel = ViewModelProvider(MainActivity()).get(UserViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -72,7 +65,6 @@ class BudgetFragment : Fragment()
 
         budgetViewModel.budgets.observe(viewLifecycleOwner, budgetObserver)
 
-
     }
 
     private fun updateBudgetButtonClick(view: View){
@@ -84,8 +76,11 @@ class BudgetFragment : Fragment()
         if(binding.spinnerBudgetFragmentCat.selectedItem != TransactionCategory.NONE){
             category = binding.spinnerBudgetFragmentCat.selectedItem as TransactionCategory
         }
-        val budget = Budget(userID, amount, category)
-        budgetViewModel.addOrUpdateBudget(budget)
+
+        userViewModel.username.observe(viewLifecycleOwner, Observer {
+            val budget = Budget(it, amount, category)
+            budgetViewModel.addOrUpdateBudget(budget)
+        })
     }
 
     private fun setupRecyclerView(view: View) {

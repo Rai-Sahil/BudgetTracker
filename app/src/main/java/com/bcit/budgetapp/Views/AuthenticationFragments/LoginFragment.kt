@@ -11,8 +11,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.bcit.budgetapp.R
+import com.bcit.budgetapp.ViewModels.UserViewModel
+import com.bcit.budgetapp.Views.AuthenticationActivity
 import com.bcit.budgetapp.Views.FragmentNavigation
 import com.bcit.budgetapp.Views.MainActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -86,7 +90,6 @@ class LoginFragment : Fragment()
                 } else {
                     username.setError("Please Enter a Valid Email ID", icon)
                 }
-
             }
         }
     }
@@ -96,6 +99,13 @@ class LoginFragment : Fragment()
             password.text.toString()).addOnCompleteListener { task ->
 
             if (task.isSuccessful){
+                val userViewModel = ViewModelProvider(AuthenticationActivity())[UserViewModel::class.java]
+
+                userViewModel.loggedInUser(username.text.toString())
+
+//                val userViewModel: UserViewModel by activityViewModels()
+//                userViewModel.loggedInUser(username.text.toString())
+
                 val intent = Intent(this.context, MainActivity::class.java)
                 startActivity(intent)
             }
