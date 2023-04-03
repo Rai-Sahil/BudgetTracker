@@ -39,7 +39,7 @@ class LoginFragment : Fragment()
         super.onCreate(savedInstanceState)
     }
 
-    @SuppressLint("SuspiciousIndentation")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,9 +61,9 @@ class LoginFragment : Fragment()
             validateEmptyForm()
         }
 
-//        view.findViewById<Button>(R.id.button_loginFragment_register)
+//        view.findViewById<Button>(R.id.button_loginFragment_register).setOnClickListener{
             binding.buttonLoginFragmentRegister.setOnClickListener{
-                var navRegister = activity as FragmentNavigation
+                val navRegister = activity as FragmentNavigation
                 navRegister.navigateFrag(SignUpFragment(), false)
             }
 
