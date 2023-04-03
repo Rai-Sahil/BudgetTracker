@@ -18,6 +18,7 @@ import com.bcit.budgetapp.Models.Transaction
 import com.bcit.budgetapp.Models.TransactionCategory
 import com.bcit.budgetapp.databinding.FragmentExpenseBinding
 import java.sql.Date
+import java.time.Instant
 
 val userID: String = "sahilrai"
 
@@ -85,8 +86,10 @@ class ExpenseFragment : Fragment()
     private fun addExpenseButtonClick(view: View)
     {
         var amount = 0.0
-        val date = Date(binding.datePickerExpense.year - 1900, binding.datePickerExpense.month, binding.datePickerExpense.dayOfMonth)
+        val currentDate = Date.from(Instant.now())
 
+        val date = Date(binding.datePickerExpense.year - 1900, binding.datePickerExpense.month, binding.datePickerExpense.dayOfMonth)
+        date.time = currentDate.time
         if(binding.editTextNumberDecimalExpense.text.toString().isNotEmpty())
         {
             amount = binding.editTextNumberDecimalExpense.text.toString().toDouble()
